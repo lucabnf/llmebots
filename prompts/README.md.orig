@@ -44,13 +44,8 @@ JSON input.
 
 ## Artifact map
 
-| Artifact | Role | Used by |
-|---|---|---|
-| `structural_rules_model_visible.txt` | Rules after comment filtering | S1--S4 |
-| `retrieved_catalog_example.txt` | Representative scene-dependent catalog context | S2 and S4 |
-| `fewshot_direct_model_visible.txt` | Natural-language WBT demonstrations | Direct S3 and S4 |
-| `fewshot_json_model_visible.txt` | JSON-to-WBT demonstrations | Structured S3 and S4 |
-| `compiler_user_template.txt` | Natural-language-to-JSON compiler template | Structured pipeline stage 1 |
-| `compiler_user_template_latex.txt` | LaTeX-safe compiler template copy | Appendix presentation |
-
-S0 uses only the common task template shown above. The catalog artifact is a representative example; actual retrieval is scene-dependent.
+- `structural_rules_model_visible.txt`: rules after comment filtering;
+- `retrieved_catalog_example.txt`: representative scene-dependent catalog context;
+- `fewshot_direct_model_visible.txt`: direct-pipeline demonstrations;
+- `fewshot_json_model_visible.txt`: JSON-to-WBT demonstrations;
+- `compiler_user_template.txt` and `compiler_user_template_latex.txt`: natural-language-to-JSON compiler templates in plain-text and LaTeX-safe forms.
