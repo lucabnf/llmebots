@@ -31,9 +31,3 @@ development set is deliberately excluded.
 Prompt files are documentation artifacts, not a standalone execution package.
 Dynamic catalog blocks depend on the scene description; a fully rendered
 held-out example is provided for inspection.
-
-## Integrity
-
-Run `sha256sum -c MANIFEST.sha256` from the repository root to verify all
-included artifacts. Paths in this repository are relative and contain no
-machine-specific source locations.
