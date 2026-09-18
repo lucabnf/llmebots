@@ -1,13 +1,9 @@
 # LLMebots: From Natural Language to Validated Webots Worlds
 
-Anonymous supplementary material for a submission to DATE 2027 (Design,
-Automation and Test in Europe Conference | The European Event for Electronic
-System Design & Test).
+Anonymous supplementary material for a submission to DATE 2027.
 
 This repository documents experimental inputs and qualitative examples that
-could not be included in the main paper. It intentionally contains no author
-information, API credentials, generated run logs, or T4 development/tuning
-scenes.
+could not be included in the main paper.
 
 ## Contents
 
@@ -15,10 +11,9 @@ scenes.
   identifiers, and inference conventions; `models/models.json` provides the same
   information in machine-readable form.
 - [prompts/README.md](prompts/README.md): prompt composition and strategy definitions;
-- [`additional/appendix_prompts/`](additional/appendix_prompts/): rendered prompt artifacts and LaTeX-safe copies.
 - [datasets/README.md](datasets/README.md): YAML scene requests and evaluation
   specifications for T1-T3 and the held-out T4 benchmark.
-- [qualitative/README.md](qualitative/README.md): prompts, provenance, and
+- [qualitative/README.md](qualitative/README.md): prompts and
   before/after images used for qualitative illustration.
 
 ## Scope
