@@ -1,0 +1,44 @@
+id: t3_36_distance_west
+tier: T3
+dataset: main
+prompt: "A blue box on the floor. A red sphere is exactly 1.5 meters from the box. A green cylinder is west of the sphere."
+
+# T3 — exact distance + cardinal chained off the distance target,
+# mirrors t3_26's pattern with a different value/direction.
+
+spec:
+  objects:
+    - id: floor
+      type: Floor
+    - id: blue_box
+      type: Box
+      on_top_of: floor
+    - id: red_sphere
+      type: Sphere
+      on_top_of: floor
+    - id: green_cylinder
+      type: Cylinder
+      on_top_of: floor
+
+  attributes:
+    - target: blue_box
+      field: baseColor
+      constraint: equals
+      value: [0.0, 0.0, 1.0]
+    - target: red_sphere
+      field: baseColor
+      constraint: equals
+      value: [1.0, 0.0, 0.0]
+    - target: green_cylinder
+      field: baseColor
+      constraint: equals
+      value: [0.0, 1.0, 0.0]
+
+  relations:
+    - type: distance
+      subject: red_sphere
+      reference: blue_box
+      value: 1.5
+    - type: west_of
+      subject: green_cylinder
+      reference: red_sphere

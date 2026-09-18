@@ -1,0 +1,29 @@
+id: t1_08_cylinder_near_sphere
+tier: T1
+dataset: main
+prompt: "A red cylinder near a blue sphere."
+
+# T1 — proximity relation. No floor asked for; both at the same
+# elevation so the height bound for `near` is trivially satisfied.
+
+spec:
+  objects:
+    - id: red_cylinder
+      type: Cylinder
+    - id: blue_sphere
+      type: Sphere
+
+  attributes:
+    - target: red_cylinder
+      field: baseColor
+      constraint: equals
+      value: [1.0, 0.0, 0.0]
+    - target: blue_sphere
+      field: baseColor
+      constraint: equals
+      value: [0.0, 0.0, 1.0]
+
+  relations:
+    - type: near
+      subject: red_cylinder
+      reference: blue_sphere

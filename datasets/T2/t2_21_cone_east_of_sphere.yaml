@@ -1,0 +1,34 @@
+id: t2_21_cone_east_of_sphere
+tier: T2
+dataset: main
+prompt: "A yellow cone east of a blue sphere. Both are on the floor."
+
+# T2 — east_of, the one cardinal direction the original 10 T2 samples
+# didn't cover (they had west/north/south/NE/NW/SE/SW/below/distance/
+# between).
+
+spec:
+  objects:
+    - id: floor
+      type: Floor
+    - id: blue_sphere
+      type: Sphere
+      on_top_of: floor
+    - id: yellow_cone
+      type: Cone
+      on_top_of: floor
+
+  attributes:
+    - target: yellow_cone
+      field: baseColor
+      constraint: equals
+      value: [1.0, 1.0, 0.0]
+    - target: blue_sphere
+      field: baseColor
+      constraint: equals
+      value: [0.0, 0.0, 1.0]
+
+  relations:
+    - type: east_of
+      subject: yellow_cone
+      reference: blue_sphere

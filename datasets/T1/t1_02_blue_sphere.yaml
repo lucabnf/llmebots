@@ -1,0 +1,19 @@
+id: t1_02_blue_sphere
+tier: T1
+dataset: main
+prompt: "A blue sphere."
+
+# T1 — single object + colour for Sphere.
+
+spec:
+  objects:
+    - id: blue_sphere
+      type: Sphere
+
+  attributes:
+    - target: blue_sphere
+      field: baseColor
+      constraint: equals
+      value: [0.0, 0.0, 1.0]
+
+  relations: []

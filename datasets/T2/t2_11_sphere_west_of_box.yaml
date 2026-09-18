@@ -1,0 +1,32 @@
+id: t2_11_sphere_west_of_box
+tier: T2
+dataset: main
+prompt: "A blue sphere west of a green box. Both are on the floor."
+
+# T2 — simple cardinal (west_of). Floor + 2 grounded objects.
+
+spec:
+  objects:
+    - id: floor
+      type: Floor
+    - id: green_box
+      type: Box
+      on_top_of: floor
+    - id: blue_sphere
+      type: Sphere
+      on_top_of: floor
+
+  attributes:
+    - target: green_box
+      field: baseColor
+      constraint: equals
+      value: [0.0, 1.0, 0.0]
+    - target: blue_sphere
+      field: baseColor
+      constraint: equals
+      value: [0.0, 0.0, 1.0]
+
+  relations:
+    - type: west_of
+      subject: blue_sphere
+      reference: green_box

@@ -1,0 +1,24 @@
+id: t1_13_short_cone
+tier: T1
+dataset: main
+prompt: "A yellow cone, twenty centimeters tall."
+
+# T1 — single primitive, color + stated size (height), mirrors
+# t1_03's cylinder-height pattern for a different primitive.
+
+spec:
+  objects:
+    - id: yellow_cone
+      type: Cone
+
+  attributes:
+    - target: yellow_cone
+      field: baseColor
+      constraint: equals
+      value: [1.0, 1.0, 0.0]
+    - target: yellow_cone
+      field: height
+      constraint: equals
+      value: 0.2
+
+  relations: []

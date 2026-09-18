@@ -1,0 +1,41 @@
+id: t3_23_cone_above_box_sphere_east
+tier: T3
+dataset: main
+prompt: "A red box on the floor. A green cone is above the box. A blue sphere is east of the box."
+
+# T3 — vertical + horizontal relations from a shared reference.
+
+spec:
+  objects:
+    - id: floor
+      type: Floor
+    - id: red_box
+      type: Box
+      on_top_of: floor
+    - id: green_cone
+      type: Cone
+    - id: blue_sphere
+      type: Sphere
+      on_top_of: floor
+
+  attributes:
+    - target: red_box
+      field: baseColor
+      constraint: equals
+      value: [1.0, 0.0, 0.0]
+    - target: green_cone
+      field: baseColor
+      constraint: equals
+      value: [0.0, 1.0, 0.0]
+    - target: blue_sphere
+      field: baseColor
+      constraint: equals
+      value: [0.0, 0.0, 1.0]
+
+  relations:
+    - type: above
+      subject: green_cone
+      reference: red_box
+    - type: east_of
+      subject: blue_sphere
+      reference: red_box

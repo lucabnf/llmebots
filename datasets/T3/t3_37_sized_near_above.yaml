@@ -1,0 +1,46 @@
+id: t3_37_sized_near_above
+tier: T3
+dataset: main
+prompt: "A blue box, one meter on each side, on the floor. A red sphere is near the box. A yellow cone is above the box."
+
+# T3 — stated size + near + above, mirrors t3_27's pattern with
+# different color/size value.
+
+spec:
+  objects:
+    - id: floor
+      type: Floor
+    - id: blue_box
+      type: Box
+      on_top_of: floor
+    - id: red_sphere
+      type: Sphere
+      on_top_of: floor
+    - id: yellow_cone
+      type: Cone
+
+  attributes:
+    - target: blue_box
+      field: baseColor
+      constraint: equals
+      value: [0.0, 0.0, 1.0]
+    - target: blue_box
+      field: size
+      constraint: equals
+      value: [1.0, 1.0, 1.0]
+    - target: red_sphere
+      field: baseColor
+      constraint: equals
+      value: [1.0, 0.0, 0.0]
+    - target: yellow_cone
+      field: baseColor
+      constraint: equals
+      value: [1.0, 1.0, 0.0]
+
+  relations:
+    - type: near
+      subject: red_sphere
+      reference: blue_box
+    - type: above
+      subject: yellow_cone
+      reference: blue_box

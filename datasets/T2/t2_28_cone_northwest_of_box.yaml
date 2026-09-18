@@ -1,0 +1,32 @@
+id: t2_28_cone_northwest_of_box
+tier: T2
+dataset: main
+prompt: "An orange cone northwest of a blue box. Both are on the floor."
+
+# T2 — northwest_of, new object/color combo (mirrors t2_15's pattern).
+
+spec:
+  objects:
+    - id: floor
+      type: Floor
+    - id: blue_box
+      type: Box
+      on_top_of: floor
+    - id: orange_cone
+      type: Cone
+      on_top_of: floor
+
+  attributes:
+    - target: blue_box
+      field: baseColor
+      constraint: equals
+      value: [0.0, 0.0, 1.0]
+    - target: orange_cone
+      field: baseColor
+      constraint: equals
+      value: [1.0, 0.5, 0.0]
+
+  relations:
+    - type: northwest_of
+      subject: orange_cone
+      reference: blue_box

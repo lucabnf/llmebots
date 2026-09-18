@@ -1,0 +1,29 @@
+id: t2_23_cylinder_above_box
+tier: T2
+dataset: main
+prompt: "A green cylinder above a red box."
+
+# T2 — "above", floating (no floor stated), parity with t2_18's
+# "below" pattern using different shapes/colors.
+
+spec:
+  objects:
+    - id: red_box
+      type: Box
+    - id: green_cylinder
+      type: Cylinder
+
+  attributes:
+    - target: red_box
+      field: baseColor
+      constraint: equals
+      value: [1.0, 0.0, 0.0]
+    - target: green_cylinder
+      field: baseColor
+      constraint: equals
+      value: [0.0, 1.0, 0.0]
+
+  relations:
+    - type: above
+      subject: green_cylinder
+      reference: red_box

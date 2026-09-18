@@ -1,0 +1,24 @@
+id: t1_20_wide_plane
+tier: T1
+dataset: main
+prompt: "A white plane, one meter square."
+
+# T1 — single primitive, color + stated size (2-element SFVec2f,
+# unlike Box's 3-element size).
+
+spec:
+  objects:
+    - id: white_plane
+      type: Plane
+
+  attributes:
+    - target: white_plane
+      field: baseColor
+      constraint: equals
+      value: [1.0, 1.0, 1.0]
+    - target: white_plane
+      field: size
+      constraint: equals
+      value: [1.0, 1.0]
+
+  relations: []

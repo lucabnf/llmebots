@@ -1,0 +1,58 @@
+id: t4h_18_bedroom_v2_variant
+tier: T4
+dataset: heldout
+prompt: 'Design a bedroom scene with a few personal touches: a bed stands on the floor. A cabinet is east of the bed, with
+  a clock standing north of it. A purple carpet lies west of the bed, and a wooden box stands south of it with a book lying
+  on top of it. A flower pot is northeast of the bed for a bit of greenery. The front of the cabinet faces the bed.'
+spec:
+  objects:
+  - id: floor
+    type: Floor
+  - id: bed
+    type: Bed
+    on_top_of: floor
+  - id: cabinet
+    type: Cabinet
+    on_top_of: floor
+  - id: carpet
+    type: Carpet
+    on_top_of: floor
+  - id: wooden_box
+    type: WoodenBox
+    on_top_of: floor
+  - id: book
+    type: Book
+    on_top_of: wooden_box
+  - id: clock
+    type: Clock
+    on_top_of: floor
+  - id: flower_pot
+    type: FlowerPot
+    on_top_of: floor
+  attributes:
+  - target: carpet
+    field: color
+    constraint: equals
+    value:
+    - 0.5
+    - 0.0
+    - 0.5
+  relations:
+  - type: east_of
+    subject: cabinet
+    reference: bed
+  - type: west_of
+    subject: carpet
+    reference: bed
+  - type: south_of
+    subject: wooden_box
+    reference: bed
+  - type: north_of
+    subject: clock
+    reference: cabinet
+  - type: northeast_of
+    subject: flower_pot
+    reference: bed
+  - type: facing
+    subject: cabinet
+    reference: bed

@@ -1,0 +1,33 @@
+id: t2_15_cone_northwest_of_cylinder
+tier: T2
+dataset: main
+prompt: "A green cone northwest of a yellow cylinder. Both are on the floor."
+
+# T2 — compound cardinal (northwest_of) with a less-common type
+# (Cone) participating.
+
+spec:
+  objects:
+    - id: floor
+      type: Floor
+    - id: yellow_cylinder
+      type: Cylinder
+      on_top_of: floor
+    - id: green_cone
+      type: Cone
+      on_top_of: floor
+
+  attributes:
+    - target: yellow_cylinder
+      field: baseColor
+      constraint: equals
+      value: [1.0, 1.0, 0.0]
+    - target: green_cone
+      field: baseColor
+      constraint: equals
+      value: [0.0, 1.0, 0.0]
+
+  relations:
+    - type: northwest_of
+      subject: green_cone
+      reference: yellow_cylinder

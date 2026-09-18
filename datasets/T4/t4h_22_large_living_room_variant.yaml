@@ -1,0 +1,81 @@
+id: t4h_22_large_living_room_variant
+tier: T4
+dataset: heldout
+prompt: 'I''m furnishing a large living room for entertaining guests: a green sofa stands on the floor. A round table is east
+  of the sofa, and an armchair is south of it. A floor light stands north of the sofa, and a potted tree is northeast of it.
+  A side table stands west of the sofa, with a television on top of it, and a cyan landscape painting is northwest of that
+  side table. A bench sits southwest of the armchair for extra seating. The sofa and television face each other.'
+spec:
+  objects:
+  - id: floor
+    type: Floor
+  - id: sofa
+    type: Sofa
+    on_top_of: floor
+  - id: round_table
+    type: RoundTable
+    on_top_of: floor
+  - id: armchair
+    type: Armchair
+    on_top_of: floor
+  - id: floor_light
+    type: FloorLight
+    on_top_of: floor
+  - id: potted_tree
+    type: PottedTree
+    on_top_of: floor
+  - id: tv_table
+    type: Table
+    on_top_of: floor
+  - id: television
+    type: Television
+    on_top_of: tv_table
+  - id: bench
+    type: Bench
+    on_top_of: floor
+  - id: painting
+    type: LandscapePainting
+    on_top_of: floor
+  attributes:
+  - target: sofa
+    field: color
+    constraint: equals
+    value:
+    - 0.0
+    - 1.0
+    - 0.0
+  - target: painting
+    field: color
+    constraint: equals
+    value:
+    - 0.0
+    - 1.0
+    - 1.0
+  relations:
+  - type: east_of
+    subject: round_table
+    reference: sofa
+  - type: south_of
+    subject: armchair
+    reference: sofa
+  - type: south_of
+    subject: sofa
+    reference: floor_light
+  - type: northeast_of
+    subject: potted_tree
+    reference: sofa
+  - type: west_of
+    subject: tv_table
+    reference: sofa
+  - type: southwest_of
+    subject: bench
+    reference: armchair
+  - type: northwest_of
+    subject: painting
+    reference: tv_table
+  - type: facing
+    subject: sofa
+    reference: television
+  - type: facing
+    subject: television
+    reference: sofa

@@ -1,0 +1,59 @@
+id: t4h_11_bathroom_variant
+tier: T4
+dataset: heldout
+prompt: 'Design a family bathroom scene with a clear layout: a bathtub stands on the floor. A white toilet is east of the
+  bathtub, a washing machine is north of it, and a bathroom sink is west of it. A grey carpet lies south of the bathtub for
+  stepping out onto. The toilet and bathroom sink face the bathtub.'
+spec:
+  objects:
+  - id: floor
+    type: Floor
+  - id: bathtub
+    type: Bathtube
+    on_top_of: floor
+  - id: toilet
+    type: Toilet
+    on_top_of: floor
+  - id: washing_machine
+    type: WashingMachine
+    on_top_of: floor
+  - id: bathroom_sink
+    type: BathroomSink
+    on_top_of: floor
+  - id: carpet
+    type: Carpet
+    on_top_of: floor
+  attributes:
+  - target: toilet
+    field: lidColor
+    constraint: equals
+    value:
+    - 1.0
+    - 1.0
+    - 1.0
+  - target: carpet
+    field: color
+    constraint: equals
+    value:
+    - 0.5
+    - 0.5
+    - 0.5
+  relations:
+  - type: west_of
+    subject: bathtub
+    reference: toilet
+  - type: south_of
+    subject: bathtub
+    reference: washing_machine
+  - type: west_of
+    subject: bathroom_sink
+    reference: bathtub
+  - type: south_of
+    subject: carpet
+    reference: bathtub
+  - type: facing
+    subject: toilet
+    reference: bathtub
+  - type: facing
+    subject: bathroom_sink
+    reference: bathtub

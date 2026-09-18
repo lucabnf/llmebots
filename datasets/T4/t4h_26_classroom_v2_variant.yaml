@@ -1,0 +1,52 @@
+id: t4h_26_classroom_v2_variant
+tier: T4
+dataset: heldout
+prompt: 'Design a classroom scene with two student desks side by side: a desk stands on the floor with a wooden chair south
+  of it. A second desk is east of the first desk, with a chair south of it. A blackboard is north of the first desk, and a
+  clock sits between the two desks so both students can see it. Both chairs face the blackboard.'
+spec:
+  objects:
+  - id: floor
+    type: Floor
+  - id: desk_1
+    type: Desk
+    on_top_of: floor
+  - id: wooden_chair
+    type: WoodenChair
+    on_top_of: floor
+  - id: desk_2
+    type: Desk
+    on_top_of: floor
+  - id: chair
+    type: Chair
+    on_top_of: floor
+  - id: blackboard
+    type: Blackboard
+    on_top_of: floor
+  - id: clock
+    type: Clock
+    on_top_of: floor
+  attributes: []
+  relations:
+  - type: south_of
+    subject: wooden_chair
+    reference: desk_1
+  - type: east_of
+    subject: desk_2
+    reference: desk_1
+  - type: south_of
+    subject: chair
+    reference: desk_2
+  - type: north_of
+    subject: blackboard
+    reference: desk_1
+  - type: between
+    subject: clock
+    endpoint1: desk_1
+    endpoint2: desk_2
+  - type: facing
+    subject: wooden_chair
+    reference: blackboard
+  - type: facing
+    subject: chair
+    reference: blackboard

@@ -1,0 +1,50 @@
+id: t3_35_cylinder_between_sphere_cone_box_above
+tier: T3
+dataset: main
+prompt: "A blue sphere, a yellow cone, and a red cylinder all on the floor. The cylinder is between the sphere and the cone. A green box is above the cylinder."
+
+# T3 — ternary "between" + "above" off its subject, mirrors t3_25's
+# pattern with different shapes/colors.
+
+spec:
+  objects:
+    - id: floor
+      type: Floor
+    - id: blue_sphere
+      type: Sphere
+      on_top_of: floor
+    - id: yellow_cone
+      type: Cone
+      on_top_of: floor
+    - id: red_cylinder
+      type: Cylinder
+      on_top_of: floor
+    - id: green_box
+      type: Box
+
+  attributes:
+    - target: blue_sphere
+      field: baseColor
+      constraint: equals
+      value: [0.0, 0.0, 1.0]
+    - target: yellow_cone
+      field: baseColor
+      constraint: equals
+      value: [1.0, 1.0, 0.0]
+    - target: red_cylinder
+      field: baseColor
+      constraint: equals
+      value: [1.0, 0.0, 0.0]
+    - target: green_box
+      field: baseColor
+      constraint: equals
+      value: [0.0, 1.0, 0.0]
+
+  relations:
+    - type: between
+      subject: red_cylinder
+      endpoint1: blue_sphere
+      endpoint2: yellow_cone
+    - type: above
+      subject: green_box
+      reference: red_cylinder

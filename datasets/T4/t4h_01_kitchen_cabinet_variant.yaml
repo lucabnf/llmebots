@@ -1,0 +1,70 @@
+id: t4h_01_kitchen_cabinet_variant
+tier: T4
+dataset: heldout
+prompt: 'I''m setting up a kitchen scene for a family that eats most of its meals at home: a table stands on the floor, with
+  a red chair northeast of it and a blue chair southwest of it. A fridge stands north of the table for easy access while cooking,
+  and a cabinet stands east of the fridge for extra storage. A yellow book lies on top of the table. Both chairs face the
+  table.'
+spec:
+  objects:
+  - id: floor
+    type: Floor
+  - id: table
+    type: Table
+    on_top_of: floor
+  - id: chair_red
+    type: Chair
+    on_top_of: floor
+  - id: chair_blue
+    type: Chair
+    on_top_of: floor
+  - id: fridge
+    type: Fridge
+    on_top_of: floor
+  - id: cabinet
+    type: Cabinet
+    on_top_of: floor
+  - id: book
+    type: Book
+    on_top_of: table
+  attributes:
+  - target: chair_red
+    field: color
+    constraint: equals
+    value:
+    - 1.0
+    - 0.0
+    - 0.0
+  - target: chair_blue
+    field: color
+    constraint: equals
+    value:
+    - 0.0
+    - 0.0
+    - 1.0
+  - target: book
+    field: color
+    constraint: equals
+    value:
+    - 1.0
+    - 1.0
+    - 0.0
+  relations:
+  - type: northeast_of
+    subject: chair_red
+    reference: table
+  - type: southwest_of
+    subject: chair_blue
+    reference: table
+  - type: south_of
+    subject: table
+    reference: fridge
+  - type: east_of
+    subject: cabinet
+    reference: fridge
+  - type: facing
+    subject: chair_red
+    reference: table
+  - type: facing
+    subject: chair_blue
+    reference: table

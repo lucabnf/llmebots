@@ -1,0 +1,39 @@
+[HEADER]
+- First line must be exactly: #VRML_SIM R2025a utf8 No other variant — neither #VRML V2.0 utf8 nor #WEBOTS_WORLD_FILE — is accepted by the Webots loader.
+
+
+[NODE TYPES]
+- Use only node types defined in the Webots reference. Do not define PROTO blocks for the geometry primitives (Box, Sphere, Cylinder, Cone, Plane) or for Floor — they exist; instantiate them by name rather than redefining them.
+
+- Every node marked "(PROTO)" in the node reference below — this includes Floor and every piece of furniture/object PROTO (Table, Chair, Sofa, ...) — is an EXTERNAL PROTO and MUST have a matching line EXTERNPROTO "<url>" placed immediately after the #VRML_SIM header line, one line per PROTO type, before that type is instantiated anywhere in the file. A PROTO instantiated without its EXTERNPROTO declaration is silently skipped by the loader — the rest of the file still loads, but that object is simply missing from the scene. Nodes with no "(PROTO)" tag (Box, Shape, Solid, Transform, Group, PBRAppearance, Material, ...) are built into VRML97/Webots and must NOT be declared this way.
+
+- The .wbt file is a flat sequence of top-level nodes. There is no enclosing root node — types named World, WorldRoot, Scene, Joint, Dynamic, or RGB do not exist in the Webots node set.
+
+- Webots .wbt files use VRML97 grammar. All-caps bracketed markers such as TITLE[...], DESCRIPTION[...], INFO_FILE[...], PHYSICS_MODE[...], GRAVITY[...], CAMERA_FOV[...], TIME_STEP[...] are not valid VRML97 tokens.
+
+
+[FIELD VALUES]
+
+- SF-typed (single-value) fields — SFVec3f, SFColor, SFFloat, SFString, SFBool, etc. — are written as bare values without square brackets. SFVec3f consists of three space-separated floats: translation 0 0 0
+
+
+[COORDINATE SYSTEM]
+
+- The Webots coordinate system is ENU: X = East, Y = North, Z = Up. The vertical axis is Z. An object resting on the floor with half-height h has translation 0 0 h, NOT translation 0 h 0.
+
+- When an object is placed "on top of" (stacking on) another object, only its Z (3rd) component encodes that height — X and Y must match the reference object's own X/Y (its horizontal position), never carry the stacking height. Confirmed live (2026-08-09, both gemma-3-12b-it and gemma-3-27b-it): the correct numeric height was computed but written into the Y slot instead — e.g. translation 0 0.711 0 (height in Y, Z left at 0) instead of the correct translation 0 0 0.711 — as if "on top of" were being treated like a horizontal (north/south) relation.
+
+
+[PHYSICAL VALIDITY]
+
+- Place every requested object's solid geometry without interpenetrating any other object's solid geometry. Account for the complete shapes, including furniture legs, tabletops, seats, chair backs, doors, and handles—not only node origins or center points. Normal contact at a supporting surface is allowed, but do not embed an object into the floor, its support, or a nearby object. Preserve all requested spatial relations while leaving clearance.
+
+- Do not obtain clearance by shrinking or removing requested objects, omitting their collision geometry, or replacing them with visibly different shapes. Adjust placement or orientation while keeping requested dimensions and attributes intact.
+
+
+[SPEC INTERPRETATION]
+
+- Attribute fields "color" and "transparency" in the input spec are NOT literal Webots field names — the compiler always uses these two fixed names regardless of the object's real type, and it is YOUR job to map each one onto the real field/structure for that specific type: a geometry primitive's color/transparency is set via a nested PBRAppearance node (Shape { appearance PBRAppearance { baseColor ... transparency ... } }), never a direct field on the primitive itself; some furniture/object PROTOs instead expose a field literally called "color". Check the catalog reference for the object's actual type to find the right real field or structure before writing it.
+- If the input spec includes an attribute with field "descriptor" (e.g. "small", "wide", "tall", or any other qualitative word), this is NOT a real Webots field name — it is a detail the compiler stage couldn't fit into any real field (most often a size/scale word with no number). Do not write "descriptor" literally into the .wbt file; use it as guidance when choosing that object's actual field values instead (e.g. a reasonable size/radius/height for "small").
+- Relation "type" values (e.g. "near", "beside", "resting above") describe the spatial relationship in plain English, not a fixed enumeration — interpret them by their everyday meaning when placing objects.
+- For "facing", follow Webots' FLU convention: local +X is forward, +Y is left, and +Z is up. Rotate the subject so +X points toward the reference in the horizontal plane unless the input spec supplies a different local_axis, world_direction, or 3d mode. Do not move an object merely to change where it faces.

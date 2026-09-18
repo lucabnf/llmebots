@@ -1,0 +1,65 @@
+id: t4h_10_multi_corner_variant
+tier: T4
+dataset: heldout
+prompt: 'I''m building a cozy living-room corner around a sofa: it stands on the floor. A round table is east of the sofa,
+  with a red book lying on top of it. An armchair is south of the sofa, a floor light stands north of it, and a potted tree
+  is northeast of it. A wooden box is west of the sofa, with a cardboard box on top of it for blankets. The sofa and armchair
+  face each other.'
+spec:
+  objects:
+  - id: floor
+    type: Floor
+  - id: sofa
+    type: Sofa
+    on_top_of: floor
+  - id: round_table
+    type: RoundTable
+    on_top_of: floor
+  - id: book
+    type: Book
+    on_top_of: round_table
+  - id: armchair
+    type: Armchair
+    on_top_of: floor
+  - id: floor_light
+    type: FloorLight
+    on_top_of: floor
+  - id: potted_tree
+    type: PottedTree
+    on_top_of: floor
+  - id: wooden_box
+    type: WoodenBox
+    on_top_of: floor
+  - id: cardboard_box
+    type: CardboardBox
+    on_top_of: wooden_box
+  attributes:
+  - target: book
+    field: color
+    constraint: equals
+    value:
+    - 1.0
+    - 0.0
+    - 0.0
+  relations:
+  - type: east_of
+    subject: round_table
+    reference: sofa
+  - type: south_of
+    subject: armchair
+    reference: sofa
+  - type: south_of
+    subject: sofa
+    reference: floor_light
+  - type: northeast_of
+    subject: potted_tree
+    reference: sofa
+  - type: west_of
+    subject: wooden_box
+    reference: sofa
+  - type: facing
+    subject: sofa
+    reference: armchair
+  - type: facing
+    subject: armchair
+    reference: sofa

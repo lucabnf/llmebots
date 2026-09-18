@@ -1,0 +1,49 @@
+id: t4h_02_home_office_variant
+tier: T4
+dataset: heldout
+prompt: 'I need a home-office scene for someone who works from a single desk all day: the desk stands on the floor with an
+  office chair west of it. A monitor stands on top of the desk, and a keyboard lies on the desk south of the monitor within
+  easy reach. A bench stands north of the desk for guests, and a floor light stands east of the desk for evening work. The
+  office chair and monitor face each other.'
+spec:
+  objects:
+  - id: floor
+    type: Floor
+  - id: desk
+    type: Desk
+    on_top_of: floor
+  - id: office_chair
+    type: OfficeChair
+    on_top_of: floor
+  - id: monitor
+    type: Monitor
+    on_top_of: desk
+  - id: keyboard
+    type: Keyboard
+    on_top_of: desk
+  - id: bench
+    type: Bench
+    on_top_of: floor
+  - id: floor_light
+    type: FloorLight
+    on_top_of: floor
+  attributes: []
+  relations:
+  - type: west_of
+    subject: office_chair
+    reference: desk
+  - type: south_of
+    subject: keyboard
+    reference: monitor
+  - type: north_of
+    subject: bench
+    reference: desk
+  - type: west_of
+    subject: desk
+    reference: floor_light
+  - type: facing
+    subject: office_chair
+    reference: monitor
+  - type: facing
+    subject: monitor
+    reference: office_chair

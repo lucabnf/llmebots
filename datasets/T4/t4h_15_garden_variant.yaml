@@ -1,0 +1,48 @@
+id: t4h_15_garden_variant
+tier: T4
+dataset: heldout
+prompt: 'I''m designing a backyard garden scene for weekend cookouts: a table with an umbrella stands on the floor. A barbecue
+  is east of the table, a wheelbarrow is west of it, and a watering can is south of it. A potted tree is north of the table,
+  and a picket fence runs along the far side of the garden, north of the tree. The barbecue faces the table with the umbrella.'
+spec:
+  objects:
+  - id: floor
+    type: Floor
+  - id: table_with_umbrella
+    type: TableWithUmbrella
+    on_top_of: floor
+  - id: barbecue
+    type: Barbecue
+    on_top_of: floor
+  - id: wheelbarrow
+    type: Wheelbarrow
+    on_top_of: floor
+  - id: watering_can
+    type: WateringCan
+    on_top_of: floor
+  - id: potted_tree
+    type: PottedTree
+    on_top_of: floor
+  - id: picket_fence
+    type: PicketFence
+    on_top_of: floor
+  attributes: []
+  relations:
+  - type: east_of
+    subject: barbecue
+    reference: table_with_umbrella
+  - type: west_of
+    subject: wheelbarrow
+    reference: table_with_umbrella
+  - type: south_of
+    subject: watering_can
+    reference: table_with_umbrella
+  - type: north_of
+    subject: potted_tree
+    reference: table_with_umbrella
+  - type: north_of
+    subject: picket_fence
+    reference: potted_tree
+  - type: facing
+    subject: barbecue
+    reference: table_with_umbrella

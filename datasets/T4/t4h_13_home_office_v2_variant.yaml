@@ -1,0 +1,52 @@
+id: t4h_13_home_office_v2_variant
+tier: T4
+dataset: heldout
+prompt: 'Set up a busy home-office desk for someone juggling calls and screens: the desk stands on the floor with an office
+  chair south of it. A laptop lies on top of the desk, a desktop computer stands on the desk east of the laptop, and a computer
+  mouse lies on the desk west of the laptop. An office telephone stands north of the desk, and a floor light is east of it.
+  The office chair faces the laptop.'
+spec:
+  objects:
+  - id: floor
+    type: Floor
+  - id: desk
+    type: Desk
+    on_top_of: floor
+  - id: office_chair
+    type: OfficeChair
+    on_top_of: floor
+  - id: laptop
+    type: Laptop
+    on_top_of: desk
+  - id: desktop_computer
+    type: DesktopComputer
+    on_top_of: desk
+  - id: computer_mouse
+    type: ComputerMouse
+    on_top_of: desk
+  - id: office_telephone
+    type: OfficeTelephone
+    on_top_of: floor
+  - id: floor_light
+    type: FloorLight
+    on_top_of: floor
+  attributes: []
+  relations:
+  - type: south_of
+    subject: office_chair
+    reference: desk
+  - type: west_of
+    subject: laptop
+    reference: desktop_computer
+  - type: west_of
+    subject: computer_mouse
+    reference: laptop
+  - type: north_of
+    subject: office_telephone
+    reference: desk
+  - type: west_of
+    subject: desk
+    reference: floor_light
+  - type: facing
+    subject: office_chair
+    reference: laptop

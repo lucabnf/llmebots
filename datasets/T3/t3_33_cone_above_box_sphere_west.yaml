@@ -1,0 +1,42 @@
+id: t3_33_cone_above_box_sphere_west
+tier: T3
+dataset: main
+prompt: "A blue box on the floor. A green cone is above the box. A red sphere is west of the box."
+
+# T3 — above + cardinal off the same anchor, mirrors t3_23's pattern
+# with different colors/direction.
+
+spec:
+  objects:
+    - id: floor
+      type: Floor
+    - id: blue_box
+      type: Box
+      on_top_of: floor
+    - id: green_cone
+      type: Cone
+    - id: red_sphere
+      type: Sphere
+      on_top_of: floor
+
+  attributes:
+    - target: blue_box
+      field: baseColor
+      constraint: equals
+      value: [0.0, 0.0, 1.0]
+    - target: green_cone
+      field: baseColor
+      constraint: equals
+      value: [0.0, 1.0, 0.0]
+    - target: red_sphere
+      field: baseColor
+      constraint: equals
+      value: [1.0, 0.0, 0.0]
+
+  relations:
+    - type: above
+      subject: green_cone
+      reference: blue_box
+    - type: west_of
+      subject: red_sphere
+      reference: blue_box

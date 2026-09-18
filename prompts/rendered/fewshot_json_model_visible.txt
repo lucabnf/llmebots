@@ -1,0 +1,247 @@
+[FEW-SHOT EXAMPLES — three demonstrations of correct .wbt scenes, each generated from a JSON spec] Use these examples to learn the correct compositional patterns (Solid wrapper for each visible object, on-floor stacking math, Cone field naming, etc.). Do not copy the example colours or object names into your output — adapt the patterns to the spec below.
+
+Example 1
+Input: {"objects": [
+   {"id": "floor", "type": "Floor"},
+   {"id": "purple_cube", "type": "Box", "on_top_of": "floor"}],
+ "attributes": [
+   {"target": "purple_cube", "field": "color", "constraint": "equals", "value": "purple"}],
+ "relations": []}
+Output:
+#VRML_SIM R2025a utf8
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/Floor.proto"
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.5773 0.5773 0.5773 2.0944
+  position 1 -1 1
+}
+Background {
+  skyColor 0.4 0.6 0.8
+}
+DirectionalLight {
+  direction -0.5 -0.5 -1
+}
+Floor {
+  size 5 5
+}
+Solid {
+  translation 0 0 0.05
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.5 0 0.5
+      }
+      geometry Box {
+        size 0.1 0.1 0.1
+      }
+    }
+  ]
+  name "purple_cube"
+}
+
+Example 2
+Input: {"objects": [
+   {"id": "floor", "type": "Floor"},
+   {"id": "white_sphere", "type": "Sphere", "on_top_of": "floor"},
+   {"id": "orange_box", "type": "Box", "on_top_of": "floor"}],
+ "attributes": [
+   {"target": "white_sphere", "field": "color", "constraint": "equals", "value": "white"},
+   {"target": "white_sphere", "field": "descriptor", "constraint": "equals", "value": "small"},
+   {"target": "orange_box", "field": "color", "constraint": "equals", "value": "orange"}],
+ "relations": [
+   {"type": "east of", "subject": "white_sphere", "reference": "orange_box"}]}
+Output:
+#VRML_SIM R2025a utf8
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/Floor.proto"
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.5773 0.5773 0.5773 2.0944
+  position 2 -2 1
+}
+Background {
+  skyColor 0.4 0.6 0.8
+}
+DirectionalLight {
+  direction -0.5 -0.5 -1
+}
+Floor {
+  size 5 5
+}
+Solid {
+  translation 0 0 0.1
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 1 0.5 0
+      }
+      geometry Box {
+        size 0.2 0.2 0.2
+      }
+    }
+  ]
+  name "orange_box"
+}
+Solid {
+  translation 0.4 0 0.05
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 1 1 1
+      }
+      geometry Sphere {
+        radius 0.05
+      }
+    }
+  ]
+  name "white_sphere"
+}
+
+Example 3
+Input: {"objects": [
+   {"id": "brown_cone", "type": "Cone"},
+   {"id": "cyan_slab", "type": "Box"}],
+ "attributes": [
+   {"target": "brown_cone", "field": "color", "constraint": "equals", "value": "brown"},
+   {"target": "brown_cone", "field": "descriptor", "constraint": "equals", "value": "small"},
+   {"target": "cyan_slab", "field": "color", "constraint": "equals", "value": "cyan"},
+   {"target": "cyan_slab", "field": "descriptor", "constraint": "equals", "value": "wide"}],
+ "relations": [
+   {"type": "above", "subject": "brown_cone", "reference": "cyan_slab"}]}
+Output:
+#VRML_SIM R2025a utf8
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.5773 0.5773 0.5773 2.0944
+  position 1 -1 1
+}
+Background {
+  skyColor 0.4 0.6 0.8
+}
+DirectionalLight {
+  direction -0.5 -0.5 -1
+}
+Solid {
+  translation 0 0 0.025
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 1 1
+      }
+      geometry Box {
+        size 0.4 0.4 0.05
+      }
+    }
+  ]
+  name "cyan_slab"
+}
+Solid {
+  translation 0 0 0.5
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.5 0.3 0.1
+      }
+      geometry Cone {
+        bottomRadius 0.1
+        height 0.2
+      }
+    }
+  ]
+  name "brown_cone"
+}
+
+Example 4
+Input: {"objects": [
+   {"id": "floor", "type": "Floor"},
+   {"id": "bed", "type": "Bed", "on_top_of": "floor"},
+   {"id": "carpet", "type": "Carpet", "on_top_of": "floor"},
+   {"id": "wooden_box", "type": "WoodenBox", "on_top_of": "floor"},
+   {"id": "book", "type": "Book", "on_top_of": "wooden_box"},
+   {"id": "cabinet", "type": "Cabinet", "on_top_of": "floor"},
+   {"id": "bench", "type": "Bench", "on_top_of": "floor"}],
+ "attributes": [
+   {"target": "carpet", "field": "color", "constraint": "equals", "value": "blue"},
+   {"target": "book", "field": "color", "constraint": "equals", "value": "green"}],
+ "relations": [
+   {"type": "east of", "subject": "carpet", "reference": "bed"},
+   {"type": "west of", "subject": "wooden_box", "reference": "bed"},
+   {"type": "south of", "subject": "cabinet", "reference": "bed"},
+   {"type": "between", "subject": "bench", "endpoint1": "bed", "endpoint2": "cabinet"}]}
+Output:
+#VRML_SIM R2025a utf8
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/Floor.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/bedroom/protos/Bed.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/living_room_furniture/protos/Carpet.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/factory/containers/protos/WoodenBox.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/school_furniture/protos/Book.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/cabinet/protos/Cabinet.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/street_furniture/protos/Bench.proto"
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.5773 0.5773 0.5773 2.0944
+  position 1 -1 1
+}
+Background {
+  skyColor 0.4 0.6 0.8
+}
+DirectionalLight {
+  direction -0.5 -0.5 -1
+}
+Floor {
+  size 10 10
+}
+Solid {
+  translation 0 0 0
+  children [
+    Bed {
+    }
+  ]
+  name "bed"
+}
+Solid {
+  translation 1 0 0.01
+  children [
+    Carpet {
+      color 0 0 1
+    }
+  ]
+  name "carpet"
+}
+Solid {
+  translation -2 0 -0.15
+  children [
+    WoodenBox {
+      size 0.3 0.3 0.3
+    }
+  ]
+  name "wooden_box"
+}
+Solid {
+  translation -2 0 0.3
+  children [
+    Book {
+      color 0 1 0
+    }
+  ]
+  name "book"
+}
+Solid {
+  translation 0 -2 0
+  children [
+    Cabinet {
+    }
+  ]
+  name "cabinet"
+}
+Solid {
+  translation -0.5 -1 0
+  children [
+    Bench {
+    }
+  ]
+  name "bench"
+}

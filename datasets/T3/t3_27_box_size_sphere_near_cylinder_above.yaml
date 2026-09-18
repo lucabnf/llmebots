@@ -1,0 +1,46 @@
+id: t3_27_box_size_sphere_near_cylinder_above
+tier: T3
+dataset: main
+prompt: "A red box, half a meter on each side, on the floor. A blue sphere is near the box. A green cylinder is above the box."
+
+# T3 — multi-attribute on one object (colour + size for the box) plus
+# two relations (near + above).
+
+spec:
+  objects:
+    - id: floor
+      type: Floor
+    - id: red_box
+      type: Box
+      on_top_of: floor
+    - id: blue_sphere
+      type: Sphere
+      on_top_of: floor
+    - id: green_cylinder
+      type: Cylinder
+
+  attributes:
+    - target: red_box
+      field: baseColor
+      constraint: equals
+      value: [1.0, 0.0, 0.0]
+    - target: red_box
+      field: size
+      constraint: equals
+      value: [0.5, 0.5, 0.5]
+    - target: blue_sphere
+      field: baseColor
+      constraint: equals
+      value: [0.0, 0.0, 1.0]
+    - target: green_cylinder
+      field: baseColor
+      constraint: equals
+      value: [0.0, 1.0, 0.0]
+
+  relations:
+    - type: near
+      subject: blue_sphere
+      reference: red_box
+    - type: above
+      subject: green_cylinder
+      reference: red_box

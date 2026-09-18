@@ -1,0 +1,60 @@
+id: t4h_29_storage_room_variant
+tier: T4
+dataset: heldout
+prompt: 'Set up a storage room shared with a small workshop: a bench stands on the floor. A wooden box is east of the bench,
+  with a cardboard box on top of it. A second wooden box is west of the bench, and a cabinet is north of it. A wall four meters
+  long runs along the south side of the room, south of the bench. A wheelbarrow sits southeast of the bench. The cabinet and
+  wheelbarrow face the bench.'
+spec:
+  objects:
+  - id: floor
+    type: Floor
+  - id: bench
+    type: Bench
+    on_top_of: floor
+  - id: wooden_box_east
+    type: WoodenBox
+    on_top_of: floor
+  - id: cardboard_box
+    type: CardboardBox
+    on_top_of: wooden_box_east
+  - id: wooden_box_west
+    type: WoodenBox
+    on_top_of: floor
+  - id: cabinet
+    type: Cabinet
+    on_top_of: floor
+  - id: wall
+    type: Wall
+    on_top_of: floor
+  - id: wheelbarrow
+    type: Wheelbarrow
+    on_top_of: floor
+  attributes:
+  - target: wall
+    field: size
+    component: y
+    constraint: equals
+    value: 4.0
+  relations:
+  - type: east_of
+    subject: wooden_box_east
+    reference: bench
+  - type: west_of
+    subject: wooden_box_west
+    reference: bench
+  - type: north_of
+    subject: cabinet
+    reference: bench
+  - type: north_of
+    subject: bench
+    reference: wall
+  - type: southeast_of
+    subject: wheelbarrow
+    reference: bench
+  - type: facing
+    subject: cabinet
+    reference: bench
+  - type: facing
+    subject: wheelbarrow
+    reference: bench

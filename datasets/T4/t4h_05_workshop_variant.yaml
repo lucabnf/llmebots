@@ -1,0 +1,44 @@
+id: t4h_05_workshop_variant
+tier: T4
+dataset: heldout
+prompt: 'Set up a home workshop for someone doing small repairs: a bench stands on the floor. A wooden box is east of the
+  bench, with a cardboard box on top of it for spare parts. A wall three meters long runs along the west side of the room,
+  west of the bench, and a cabinet stands north of the bench for tools. The front of the cabinet faces the bench.'
+spec:
+  objects:
+  - id: floor
+    type: Floor
+  - id: bench
+    type: Bench
+    on_top_of: floor
+  - id: wooden_box
+    type: WoodenBox
+    on_top_of: floor
+  - id: cardboard_box
+    type: CardboardBox
+    on_top_of: wooden_box
+  - id: wall
+    type: Wall
+    on_top_of: floor
+  - id: cabinet
+    type: Cabinet
+    on_top_of: floor
+  attributes:
+  - target: wall
+    field: size
+    component: y
+    constraint: equals
+    value: 3.0
+  relations:
+  - type: east_of
+    subject: wooden_box
+    reference: bench
+  - type: east_of
+    subject: bench
+    reference: wall
+  - type: north_of
+    subject: cabinet
+    reference: bench
+  - type: facing
+    subject: cabinet
+    reference: bench

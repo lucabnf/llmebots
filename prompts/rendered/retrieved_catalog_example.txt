@@ -1,0 +1,230 @@
+[WEBOTS NODE REFERENCE — documentation, not code]
+The list below documents each node's allowed fields and their VRML field types. Use only these nodes and fields. When you write VRML97, omit the parentheses and the word 'default' — those are documentation annotations only. VRML97 syntax is bare: write `field value`, not `field: value`. Some size/radius/height fields show 'e.g. {x} {y} {z}' instead of a default — this is a placeholder showing how many numbers the field takes, NOT a literal value to copy. Choose the actual numbers to fit the scene being described.
+
+DirectionalLight
+  - ambientIntensity (SFFloat)   default 0
+  - color (SFColor)   default 1 1 1
+  - direction (SFVec3f)   default 0 0 -1
+  - intensity (SFFloat)   default 1
+  - on (SFBool)   default TRUE
+  - castShadows (SFBool)   default FALSE
+  - castLensFlares (SFBool)   default FALSE
+
+PointLight
+  - ambientIntensity (SFFloat)   default 0
+  - attenuation (SFVec3f)   default 1 0 0
+  - color (SFColor)   default 1 1 1
+  - intensity (SFFloat)   default 1
+  - location (SFVec3f)   default 0 0 0
+  - on (SFBool)   default TRUE
+  - radius (SFFloat)   e.g. {value}
+  - castShadows (SFBool)   default FALSE
+
+SpotLight
+  - ambientIntensity (SFFloat)   default 0
+  - attenuation (SFVec3f)   default 1 0 0
+  - beamWidth (SFFloat)   default 1.570796
+  - color (SFColor)   default 1 1 1
+  - cutOffAngle (SFFloat)   default 0.785398
+  - direction (SFVec3f)   default 0 0 -1
+  - intensity (SFFloat)   default 1
+  - location (SFVec3f)   default 0 0 0
+  - on (SFBool)   default TRUE
+  - radius (SFFloat)   e.g. {value}
+  - castShadows (SFBool)   default FALSE
+
+Solid
+  - translation (SFVec3f)   default 0 0 0
+  - rotation (SFRotation)   default 0 0 1 0
+  - children (MFNode)   default []
+  - name (SFString)   default "solid"
+  - model (SFString)   default ""
+  - description (SFString)   default ""
+  - contactMaterial (SFString)   default "default"
+  - immersionProperties (MFNode)   default []
+  - boundingObject (SFNode)   default NULL
+  - physics (SFNode)   default NULL
+  - locked (SFBool)   default FALSE
+  - radarCrossSection (SFFloat)   default 0.0
+  - recognitionColors (MFColor)   default []
+  - translationStep (SFFloat)   default 0.01
+  - rotationStep (SFFloat)   default 0.261799387
+  - linearVelocity (SFVec3f)   default 0 0 0
+  - angularVelocity (SFVec3f)   default 0 0 0
+
+Shape
+  - appearance (SFNode)   default NULL
+  - geometry (SFNode)   default NULL
+  - castShadows (SFBool)   default TRUE
+  - isPickable (SFBool)   default TRUE
+
+Group
+  - children (MFNode)   default []
+
+Transform
+  - translation (SFVec3f)   default 0 0 0
+  - rotation (SFRotation)   default 0 0 1 0
+  - scale (SFVec3f)   default 1 1 1
+  - children (MFNode)   default []
+  - translationStep (SFFloat)   default 0.01
+  - rotationStep (SFFloat)   default 0.261799387
+
+Pose
+  - translation (SFVec3f)   default 0 0 0
+  - rotation (SFRotation)   default 0 0 1 0
+  - children (MFNode)   default []
+  - translationStep (SFFloat)   default 0.01
+  - rotationStep (SFFloat)   default 0.261799387
+
+Appearance
+  - material (SFNode)   default NULL
+  - texture (SFNode)   default NULL
+  - textureTransform (SFNode)   default NULL
+  - name (SFString)   default "appearance"
+
+PBRAppearance
+  - baseColor (SFColor)   default 1 1 1
+  - baseColorMap (SFNode)   default NULL
+  - transparency (SFFloat)   default 0
+  - roughness (SFFloat)   default 0
+  - roughnessMap (SFNode)   default NULL
+  - metalness (SFFloat)   default 1
+  - metalnessMap (SFNode)   default NULL
+  - IBLStrength (SFFloat)   default 1
+  - normalMap (SFNode)   default NULL
+  - normalMapFactor (SFFloat)   default 1
+  - occlusionMap (SFNode)   default NULL
+  - occlusionMapStrength (SFFloat)   default 1
+  - emissiveColor (SFColor)   default 0 0 0
+  - emissiveColorMap (SFNode)   default NULL
+  - emissiveIntensity (SFFloat)   default 1
+  - textureTransform (SFNode)   default NULL
+  - name (SFString)   default "PBRAppearance"
+
+Material
+  - ambientIntensity (SFFloat)   default 0.2
+  - diffuseColor (SFColor)   default 0.8 0.8 0.8
+  - emissiveColor (SFColor)   default 0 0 0
+  - shininess (SFFloat)   default 0.2
+  - specularColor (SFColor)   default 0 0 0
+  - transparency (SFFloat)   default 0
+
+ImageTexture
+  - url (MFString)   default []
+  - repeatS (SFBool)   default TRUE
+  - repeatT (SFBool)   default TRUE
+  - filtering (SFInt32)   default 4
+
+Table (PROTO)
+  - translation (SFVec3f)   default 0 0 0
+  - rotation (SFRotation)   default 0 0 1 0
+  - name (SFString)   default "table"
+  - size (SFVec3f)   e.g. {x} {y} {z}
+  - feetSize (SFVec2f)   default 0.1 0.1
+  - feetPadding (SFFloat)   default 0
+  - frameThickness (SFFloat)   default 0.05
+  - trayAppearance (SFNode)   default VarnishedPine { textureTransform TextureTransform { scale 10 10 } }
+  - legAppearance (SFNode)   default VarnishedPine { textureTransform TextureTransform { scale 4 5 } }
+
+Floor (PROTO)
+  - translation (SFVec3f)   default 0 0 0
+  - rotation (SFRotation)   default 0 0 1 0
+  - name (SFString)   default "floor"
+  - contactMaterial (SFString)   default "default"
+  - size (SFVec2f)   e.g. {x} {y}
+  - tileSize (SFVec2f)   default 0.5 0.5
+  - appearance (SFNode)   default Parquetry { type "chequered" }
+
+Chair (PROTO)
+  - translation (SFVec3f)   default 0 0 0
+  - rotation (SFRotation)   default 0 0 1 0
+  - name (SFString)   default "chair"
+  - color (SFColor)   default 1 1 1
+  - physics (SFNode)   default NULL
+
+Fridge (PROTO)
+  - translation (SFVec3f)   default 0 0 0
+  - rotation (SFRotation)   default 0 0 1 0
+  - name (SFString)   default "fridge"
+  - mainColor (SFColor)   default 1 1 1
+
+Cabinet (PROTO)
+  - translation (SFVec3f)   default 0 0 0
+  - rotation (SFRotation)   default 0 0 1 0
+  - name (SFString)   default "cabinet"
+  - depth (SFFloat)   default 0.5
+  - innerThickness (SFFloat)   default 0.02
+  - outerThickness (SFFloat)   default 0.03
+  - rowsHeights (MFFloat)   default [ 0.24 0.2 0.2 0.4 0.4 ]
+  - columnsWidths (MFFloat)   default [ 0.4 0.17 0.17 ]
+  - layout (MFString)   default [ "RightSidedDoor (1, 4, 1, 2, 1.5)" "LeftSidedDoor (2, 4, 2, 2, 1.5)" "Drawer (3, 3, 1, 1, 1.5)" "Drawer (2, 2, 1, 1, 1.5)" "Drawer (3, 2, 1, 1, 1...
+  - handle (SFNode)   default CabinetHandle {}
+  - primaryAppearance (SFNode)   default PaintedWood {}
+  - secondaryAppearance (SFNode)   default PaintedWood {}
+
+Book (PROTO)
+  - translation (SFVec3f)   default 0 0 0.1
+  - rotation (SFRotation)   default 0 0 1 0
+  - name (SFString)   default "book"
+  - color (SFColor)   default 1 1 1
+  - textureUrl (MFString)   default "textures/book.jpg"
+  - mass (SFFloat)   default 0.3
+
+WorldInfo
+  - info (MFString)   default []
+  - title (SFString)   default ""
+  - window (SFString)   default "<none>"
+  - gravity (SFFloat)   default 9.81
+  - CFM (SFFloat)   default 0.00001
+  - ERP (SFFloat)   default 0.2
+  - physics (SFString)   default "<none>"
+  - basicTimeStep (SFFloat)   default 32
+  - FPS (SFFloat)   default 60
+  - optimalThreadCount (SFInt32)   default 1
+  - physicsDisableTime (SFFloat)   default 1
+  - physicsDisableLinearThreshold (SFFloat)   default 0.01
+  - physicsDisableAngularThreshold (SFFloat)   default 0.01
+  - defaultDamping (SFNode)   default NULL
+  - inkEvaporation (SFFloat)   default 0
+  - coordinateSystem (SFString)   default "ENU"
+  - gpsCoordinateSystem (SFString)   default "local"
+  - gpsReference (SFVec3f)   default 0 0 0
+  - lineScale (SFFloat)   default 0.1
+  - dragForceScale (SFFloat)   default 30.0
+  - dragTorqueScale (SFFloat)   default 5.0
+  - randomSeed (SFInt32)   default 0
+  - contactProperties (MFNode)   default []
+  - northDirection (SFVec3f)   default 0 1 0
+  - fast2d (SFString)   default ""
+
+Viewpoint
+  - fieldOfView (SFFloat)   default 0.785398
+  - orientation (SFRotation)   default 0 0 1 0
+  - position (SFVec3f)   default -10 0 0
+  - description (SFString)   default ""
+  - near (SFFloat)   default 0.05
+  - far (SFFloat)   default 0.0
+  - exposure (SFFloat)   default 1.0
+  - follow (SFString)   default ""
+  - followType (SFString)   default "Tracking Shot"
+  - followSmoothness (SFFloat)   default 0.5
+  - lensFlare (SFNode)   default NULL
+  - ambientOcclusionRadius (SFFloat)   default 2
+  - bloomThreshold (SFFloat)   default 21
+  - followOrientation (SFBool)   default FALSE
+
+Background
+  - skyColor (MFColor)   default [ 0 0 0 ]
+  - backUrl (MFString)   default []
+  - bottomUrl (MFString)   default []
+  - frontUrl (MFString)   default []
+  - leftUrl (MFString)   default []
+  - rightUrl (MFString)   default []
+  - topUrl (MFString)   default []
+  - backIrradianceUrl (MFString)   default []
+  - bottomIrradianceUrl (MFString)   default []
+  - frontIrradianceUrl (MFString)   default []
+  - leftIrradianceUrl (MFString)   default []
+  - rightIrradianceUrl (MFString)   default []
+  - topIrradianceUrl (MFString)   default []
+  - luminosity (SFFloat)   default 1

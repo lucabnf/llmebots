@@ -1,0 +1,29 @@
+id: t1_07_sphere_east_of_box
+tier: T1
+dataset: main
+prompt: "A blue sphere east of a green box."
+
+# T1 — minimal scene exercising a simple cardinal (east_of). No floor
+# is asked for — tests an ungrounded scene.
+
+spec:
+  objects:
+    - id: green_box
+      type: Box
+    - id: blue_sphere
+      type: Sphere
+
+  attributes:
+    - target: green_box
+      field: baseColor
+      constraint: equals
+      value: [0.0, 1.0, 0.0]
+    - target: blue_sphere
+      field: baseColor
+      constraint: equals
+      value: [0.0, 0.0, 1.0]
+
+  relations:
+    - type: east_of
+      subject: blue_sphere
+      reference: green_box

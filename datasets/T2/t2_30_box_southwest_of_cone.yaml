@@ -1,0 +1,32 @@
+id: t2_30_box_southwest_of_cone
+tier: T2
+dataset: main
+prompt: "A red box southwest of a green cone. Both are on the floor."
+
+# T2 — southwest_of, new object/color combo (mirrors t2_17's pattern).
+
+spec:
+  objects:
+    - id: floor
+      type: Floor
+    - id: green_cone
+      type: Cone
+      on_top_of: floor
+    - id: red_box
+      type: Box
+      on_top_of: floor
+
+  attributes:
+    - target: green_cone
+      field: baseColor
+      constraint: equals
+      value: [0.0, 1.0, 0.0]
+    - target: red_box
+      field: baseColor
+      constraint: equals
+      value: [1.0, 0.0, 0.0]
+
+  relations:
+    - type: southwest_of
+      subject: red_box
+      reference: green_cone

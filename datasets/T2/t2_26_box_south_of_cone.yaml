@@ -1,0 +1,32 @@
+id: t2_26_box_south_of_cone
+tier: T2
+dataset: main
+prompt: "A blue box south of a yellow cone. Both are on the floor."
+
+# T2 — south_of, new object/color combo (mirrors t2_13's pattern).
+
+spec:
+  objects:
+    - id: floor
+      type: Floor
+    - id: yellow_cone
+      type: Cone
+      on_top_of: floor
+    - id: blue_box
+      type: Box
+      on_top_of: floor
+
+  attributes:
+    - target: yellow_cone
+      field: baseColor
+      constraint: equals
+      value: [1.0, 1.0, 0.0]
+    - target: blue_box
+      field: baseColor
+      constraint: equals
+      value: [0.0, 0.0, 1.0]
+
+  relations:
+    - type: south_of
+      subject: blue_box
+      reference: yellow_cone

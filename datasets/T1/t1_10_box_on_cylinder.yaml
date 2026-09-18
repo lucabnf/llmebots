@@ -1,0 +1,28 @@
+id: t1_10_box_on_cylinder
+tier: T1
+dataset: main
+prompt: "A red box on top of a green cylinder."
+
+# T1 — stacking on a non-floor reference. Tests the height-math
+# (box_z = cylinder_z + cylinder.height/2 + box.size.z/2) without a
+# floor.
+
+spec:
+  objects:
+    - id: green_cylinder
+      type: Cylinder
+    - id: red_box
+      type: Box
+      on_top_of: green_cylinder
+
+  attributes:
+    - target: green_cylinder
+      field: baseColor
+      constraint: equals
+      value: [0.0, 1.0, 0.0]
+    - target: red_box
+      field: baseColor
+      constraint: equals
+      value: [1.0, 0.0, 0.0]
+
+  relations: []

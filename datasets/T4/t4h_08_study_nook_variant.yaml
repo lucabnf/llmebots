@@ -1,0 +1,43 @@
+id: t4h_08_study_nook_variant
+tier: T4
+dataset: heldout
+prompt: 'For a compact study nook, I need a desk scene where every piece has its place: the desk stands on the floor with
+  a chair south of it. A monitor stands on top of the desk. A cabinet stands north of the desk for files, and a floor light
+  sits between the desk and the cabinet to light both. The chair and monitor face each other.'
+spec:
+  objects:
+  - id: floor
+    type: Floor
+  - id: desk
+    type: Desk
+    on_top_of: floor
+  - id: chair
+    type: Chair
+    on_top_of: floor
+  - id: monitor
+    type: Monitor
+    on_top_of: desk
+  - id: cabinet
+    type: Cabinet
+    on_top_of: floor
+  - id: floor_light
+    type: FloorLight
+    on_top_of: floor
+  attributes: []
+  relations:
+  - type: south_of
+    subject: chair
+    reference: desk
+  - type: south_of
+    subject: desk
+    reference: cabinet
+  - type: between
+    subject: floor_light
+    endpoint1: desk
+    endpoint2: cabinet
+  - type: facing
+    subject: chair
+    reference: monitor
+  - type: facing
+    subject: monitor
+    reference: chair

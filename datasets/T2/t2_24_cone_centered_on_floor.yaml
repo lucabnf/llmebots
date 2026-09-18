@@ -1,0 +1,26 @@
+id: t2_24_cone_centered_on_floor
+tier: T2
+dataset: main
+prompt: "A yellow cone centered on the floor."
+
+# T2 — "center_inside", the one relation type the original 10 T2
+# samples didn't cover (it appears at T3, e.g. t3_21).
+
+spec:
+  objects:
+    - id: floor
+      type: Floor
+    - id: yellow_cone
+      type: Cone
+      on_top_of: floor
+
+  attributes:
+    - target: yellow_cone
+      field: baseColor
+      constraint: equals
+      value: [1.0, 1.0, 0.0]
+
+  relations:
+    - type: center_inside
+      subject: yellow_cone
+      reference: floor

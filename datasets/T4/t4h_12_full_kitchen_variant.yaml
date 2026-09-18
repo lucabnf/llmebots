@@ -1,0 +1,55 @@
+id: t4h_12_full_kitchen_variant
+tier: T4
+dataset: heldout
+prompt: 'I need a fully equipped kitchen for someone who cooks daily: a table stands on the floor. A fridge is north of the
+  table, a sink is east of it, and an oven is west of it. A red cookware pot lies on top of the table, and a plate lies on
+  the table east of the cookware, ready for serving. The sink and oven face the table.'
+spec:
+  objects:
+  - id: floor
+    type: Floor
+  - id: table
+    type: Table
+    on_top_of: floor
+  - id: fridge
+    type: Fridge
+    on_top_of: floor
+  - id: sink
+    type: Sink
+    on_top_of: floor
+  - id: oven
+    type: Oven
+    on_top_of: floor
+  - id: cookware
+    type: Cookware
+    on_top_of: table
+  - id: plate
+    type: Plate
+    on_top_of: table
+  attributes:
+  - target: cookware
+    field: color
+    constraint: equals
+    value:
+    - 1.0
+    - 0.0
+    - 0.0
+  relations:
+  - type: south_of
+    subject: table
+    reference: fridge
+  - type: east_of
+    subject: sink
+    reference: table
+  - type: west_of
+    subject: oven
+    reference: table
+  - type: east_of
+    subject: plate
+    reference: cookware
+  - type: facing
+    subject: sink
+    reference: table
+  - type: facing
+    subject: oven
+    reference: table

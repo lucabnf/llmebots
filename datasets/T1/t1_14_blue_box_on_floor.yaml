@@ -1,0 +1,23 @@
+id: t1_14_blue_box_on_floor
+tier: T1
+dataset: main
+prompt: "A blue box on the floor."
+
+# T1 — single object explicitly grounded on the floor, mirrors
+# t1_06's pattern with a different color.
+
+spec:
+  objects:
+    - id: floor
+      type: Floor
+    - id: blue_box
+      type: Box
+      on_top_of: floor
+
+  attributes:
+    - target: blue_box
+      field: baseColor
+      constraint: equals
+      value: [0.0, 0.0, 1.0]
+
+  relations: []

@@ -1,0 +1,20 @@
+id: t1_01_red_box
+tier: T1
+dataset: main
+prompt: "A red box."
+
+# T1 — single object + colour. Baseline for object detection +
+# colour attribute on a Box (no floor, no relations).
+
+spec:
+  objects:
+    - id: red_box
+      type: Box
+
+  attributes:
+    - target: red_box
+      field: baseColor
+      constraint: equals
+      value: [1.0, 0.0, 0.0]
+
+  relations: []

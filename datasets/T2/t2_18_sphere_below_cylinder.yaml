@@ -1,0 +1,29 @@
+id: t2_18_sphere_below_cylinder
+tier: T2
+dataset: main
+prompt: "A red sphere below a green cylinder."
+
+# T2 — vertical relation (below). Ungrounded scene — both objects
+# float in space, sphere at lower Z than cylinder, with XY overlap.
+
+spec:
+  objects:
+    - id: green_cylinder
+      type: Cylinder
+    - id: red_sphere
+      type: Sphere
+
+  attributes:
+    - target: green_cylinder
+      field: baseColor
+      constraint: equals
+      value: [0.0, 1.0, 0.0]
+    - target: red_sphere
+      field: baseColor
+      constraint: equals
+      value: [1.0, 0.0, 0.0]
+
+  relations:
+    - type: below
+      subject: red_sphere
+      reference: green_cylinder

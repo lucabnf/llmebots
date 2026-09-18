@@ -1,0 +1,68 @@
+id: t4h_24_large_bedroom_suite_variant
+tier: T4
+dataset: heldout
+prompt: 'Build a spacious bedroom suite: a bed stands on the floor. A cabinet is east of the bed, and a grey carpet lies west
+  of it. A wooden box stands south of the bed, with a green book lying on top of it and a water bottle standing on it. A bench
+  is north of the bed, and a mirror is northeast of it. The mirror faces the bed.'
+spec:
+  objects:
+  - id: floor
+    type: Floor
+  - id: bed
+    type: Bed
+    on_top_of: floor
+  - id: cabinet
+    type: Cabinet
+    on_top_of: floor
+  - id: carpet
+    type: Carpet
+    on_top_of: floor
+  - id: wooden_box
+    type: WoodenBox
+    on_top_of: floor
+  - id: book
+    type: Book
+    on_top_of: wooden_box
+  - id: water_bottle
+    type: WaterBottle
+    on_top_of: wooden_box
+  - id: bench
+    type: Bench
+    on_top_of: floor
+  - id: mirror
+    type: Mirror
+    on_top_of: floor
+  attributes:
+  - target: carpet
+    field: color
+    constraint: equals
+    value:
+    - 0.5
+    - 0.5
+    - 0.5
+  - target: book
+    field: color
+    constraint: equals
+    value:
+    - 0.0
+    - 1.0
+    - 0.0
+  relations:
+  - type: east_of
+    subject: cabinet
+    reference: bed
+  - type: west_of
+    subject: carpet
+    reference: bed
+  - type: south_of
+    subject: wooden_box
+    reference: bed
+  - type: north_of
+    subject: bench
+    reference: bed
+  - type: northeast_of
+    subject: mirror
+    reference: bed
+  - type: facing
+    subject: mirror
+    reference: bed

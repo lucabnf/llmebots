@@ -1,0 +1,44 @@
+id: t3_29_cone_north_of_box_sphere_east_of_cone
+tier: T3
+dataset: main
+prompt: "A red box, a green cone, and a blue sphere on the floor. The cone is north of the box, and the sphere is east of the cone."
+
+# T3 — chained cardinals (different reference objects). Tests
+# whether the model maintains consistent placement when relations
+# refer to different anchors.
+
+spec:
+  objects:
+    - id: floor
+      type: Floor
+    - id: red_box
+      type: Box
+      on_top_of: floor
+    - id: green_cone
+      type: Cone
+      on_top_of: floor
+    - id: blue_sphere
+      type: Sphere
+      on_top_of: floor
+
+  attributes:
+    - target: red_box
+      field: baseColor
+      constraint: equals
+      value: [1.0, 0.0, 0.0]
+    - target: green_cone
+      field: baseColor
+      constraint: equals
+      value: [0.0, 1.0, 0.0]
+    - target: blue_sphere
+      field: baseColor
+      constraint: equals
+      value: [0.0, 0.0, 1.0]
+
+  relations:
+    - type: north_of
+      subject: green_cone
+      reference: red_box
+    - type: east_of
+      subject: blue_sphere
+      reference: green_cone

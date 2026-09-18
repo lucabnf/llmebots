@@ -1,0 +1,75 @@
+id: t4h_21_kitchen_dining_combo_variant
+tier: T4
+dataset: heldout
+prompt: 'Design an open-plan kitchen and dining area for everyday family life: a table stands on the floor with a red chair
+  east of it and a blue chair west of it. A fridge is north of the table, and a sink is south of it. An apple lies on top
+  of the table, with a yellow book on the table east of the apple. Both chairs face the table.'
+spec:
+  objects:
+  - id: floor
+    type: Floor
+  - id: table
+    type: Table
+    on_top_of: floor
+  - id: chair_red
+    type: Chair
+    on_top_of: floor
+  - id: chair_blue
+    type: Chair
+    on_top_of: floor
+  - id: fridge
+    type: Fridge
+    on_top_of: floor
+  - id: sink
+    type: Sink
+    on_top_of: floor
+  - id: apple
+    type: Apple
+    on_top_of: table
+  - id: book
+    type: Book
+    on_top_of: table
+  attributes:
+  - target: chair_red
+    field: color
+    constraint: equals
+    value:
+    - 1.0
+    - 0.0
+    - 0.0
+  - target: chair_blue
+    field: color
+    constraint: equals
+    value:
+    - 0.0
+    - 0.0
+    - 1.0
+  - target: book
+    field: color
+    constraint: equals
+    value:
+    - 1.0
+    - 1.0
+    - 0.0
+  relations:
+  - type: east_of
+    subject: chair_red
+    reference: table
+  - type: west_of
+    subject: chair_blue
+    reference: table
+  - type: south_of
+    subject: table
+    reference: fridge
+  - type: south_of
+    subject: sink
+    reference: table
+  - type: east_of
+    subject: book
+    reference: apple
+  - type: facing
+    subject: chair_red
+    reference: table
+  - type: facing
+    subject: chair_blue
+    reference: table

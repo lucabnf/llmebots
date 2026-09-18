@@ -1,0 +1,58 @@
+id: t4h_16_living_room_decor_variant
+tier: T4
+dataset: heldout
+prompt: 'Build a living-room scene focused on wall decor around a sofa: it stands on the floor. A round table is east of the
+  sofa, and an armchair is north of it. A brown landscape painting hangs south of the sofa, with a mirror west of the painting.
+  A floor light stands northeast of the sofa for evening light. The sofa and armchair face each other.'
+spec:
+  objects:
+  - id: floor
+    type: Floor
+  - id: sofa
+    type: Sofa
+    on_top_of: floor
+  - id: round_table
+    type: RoundTable
+    on_top_of: floor
+  - id: armchair
+    type: Armchair
+    on_top_of: floor
+  - id: painting
+    type: LandscapePainting
+    on_top_of: floor
+  - id: mirror
+    type: Mirror
+    on_top_of: floor
+  - id: floor_light
+    type: FloorLight
+    on_top_of: floor
+  attributes:
+  - target: painting
+    field: color
+    constraint: equals
+    value:
+    - 0.5
+    - 0.3
+    - 0.1
+  relations:
+  - type: east_of
+    subject: round_table
+    reference: sofa
+  - type: north_of
+    subject: armchair
+    reference: sofa
+  - type: south_of
+    subject: painting
+    reference: sofa
+  - type: west_of
+    subject: mirror
+    reference: painting
+  - type: southwest_of
+    subject: sofa
+    reference: floor_light
+  - type: facing
+    subject: sofa
+    reference: armchair
+  - type: facing
+    subject: armchair
+    reference: sofa

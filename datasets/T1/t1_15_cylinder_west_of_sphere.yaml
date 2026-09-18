@@ -1,0 +1,29 @@
+id: t1_15_cylinder_west_of_sphere
+tier: T1
+dataset: main
+prompt: "A green cylinder west of a red sphere."
+
+# T1 — two objects, single cardinal relation, no floor stated, mirrors
+# t1_07's pattern with different shapes/colors/direction.
+
+spec:
+  objects:
+    - id: green_cylinder
+      type: Cylinder
+    - id: red_sphere
+      type: Sphere
+
+  attributes:
+    - target: green_cylinder
+      field: baseColor
+      constraint: equals
+      value: [0.0, 1.0, 0.0]
+    - target: red_sphere
+      field: baseColor
+      constraint: equals
+      value: [1.0, 0.0, 0.0]
+
+  relations:
+    - type: west_of
+      subject: green_cylinder
+      reference: red_sphere

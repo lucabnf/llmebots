@@ -1,0 +1,24 @@
+id: t1_03_tall_green_cylinder
+tier: T1
+dataset: main
+prompt: "A green cylinder, one meter tall."
+
+# T1 — Cylinder with two attributes (colour + height). Tests the
+# height field on Cylinder.
+
+spec:
+  objects:
+    - id: green_cylinder
+      type: Cylinder
+
+  attributes:
+    - target: green_cylinder
+      field: baseColor
+      constraint: equals
+      value: [0.0, 1.0, 0.0]
+    - target: green_cylinder
+      field: height
+      constraint: equals
+      value: 1.0
+
+  relations: []

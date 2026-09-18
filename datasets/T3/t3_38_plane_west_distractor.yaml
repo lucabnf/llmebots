@@ -1,0 +1,38 @@
+id: t3_38_plane_west_distractor
+tier: T3
+dataset: main
+prompt: "A purple plane standing as a panel. A yellow cylinder is west of the plane. A green box is on the floor."
+
+# T3 — single relation plus an unrelated "distractor" object, mirrors
+# t3_28's pattern with different colors/direction.
+
+spec:
+  objects:
+    - id: purple_plane
+      type: Plane
+    - id: yellow_cylinder
+      type: Cylinder
+    - id: floor
+      type: Floor
+    - id: green_box
+      type: Box
+      on_top_of: floor
+
+  attributes:
+    - target: purple_plane
+      field: baseColor
+      constraint: equals
+      value: [0.5, 0.0, 0.5]
+    - target: yellow_cylinder
+      field: baseColor
+      constraint: equals
+      value: [1.0, 1.0, 0.0]
+    - target: green_box
+      field: baseColor
+      constraint: equals
+      value: [0.0, 1.0, 0.0]
+
+  relations:
+    - type: west_of
+      subject: yellow_cylinder
+      reference: purple_plane

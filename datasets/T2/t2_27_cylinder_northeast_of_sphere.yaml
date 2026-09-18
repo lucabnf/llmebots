@@ -1,0 +1,32 @@
+id: t2_27_cylinder_northeast_of_sphere
+tier: T2
+dataset: main
+prompt: "A purple cylinder northeast of a red sphere. Both are on the floor."
+
+# T2 — northeast_of, new object/color combo (mirrors t2_14's pattern).
+
+spec:
+  objects:
+    - id: floor
+      type: Floor
+    - id: red_sphere
+      type: Sphere
+      on_top_of: floor
+    - id: purple_cylinder
+      type: Cylinder
+      on_top_of: floor
+
+  attributes:
+    - target: red_sphere
+      field: baseColor
+      constraint: equals
+      value: [1.0, 0.0, 0.0]
+    - target: purple_cylinder
+      field: baseColor
+      constraint: equals
+      value: [0.5, 0.0, 0.5]
+
+  relations:
+    - type: northeast_of
+      subject: purple_cylinder
+      reference: red_sphere

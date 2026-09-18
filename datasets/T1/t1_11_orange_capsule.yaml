@@ -1,0 +1,20 @@
+id: t1_11_orange_capsule
+tier: T1
+dataset: main
+prompt: "An orange capsule."
+
+# T1 — single primitive, color only. Introduces Capsule (already used
+# in T4) and orange at the T1 baseline complexity level.
+
+spec:
+  objects:
+    - id: orange_capsule
+      type: Capsule
+
+  attributes:
+    - target: orange_capsule
+      field: baseColor
+      constraint: equals
+      value: [1.0, 0.5, 0.0]
+
+  relations: []

@@ -1,0 +1,75 @@
+id: t4h_23_office_break_area_variant
+tier: T4
+dataset: heldout
+prompt: 'Design an office that doubles as a small break area: a desk stands on the floor with an office chair south of it.
+  A monitor stands on top of the desk. A table is east of the desk, with a red chair north of it and a blue chair south of
+  it for coffee breaks. A fridge is east of the table. The office chair and monitor face each other, and both coffee-break
+  chairs face their table.'
+spec:
+  objects:
+  - id: floor
+    type: Floor
+  - id: desk
+    type: Desk
+    on_top_of: floor
+  - id: office_chair
+    type: OfficeChair
+    on_top_of: floor
+  - id: monitor
+    type: Monitor
+    on_top_of: desk
+  - id: table
+    type: Table
+    on_top_of: floor
+  - id: chair_red
+    type: Chair
+    on_top_of: floor
+  - id: chair_blue
+    type: Chair
+    on_top_of: floor
+  - id: fridge
+    type: Fridge
+    on_top_of: floor
+  attributes:
+  - target: chair_red
+    field: color
+    constraint: equals
+    value:
+    - 1.0
+    - 0.0
+    - 0.0
+  - target: chair_blue
+    field: color
+    constraint: equals
+    value:
+    - 0.0
+    - 0.0
+    - 1.0
+  relations:
+  - type: south_of
+    subject: office_chair
+    reference: desk
+  - type: east_of
+    subject: table
+    reference: desk
+  - type: north_of
+    subject: chair_red
+    reference: table
+  - type: south_of
+    subject: chair_blue
+    reference: table
+  - type: west_of
+    subject: table
+    reference: fridge
+  - type: facing
+    subject: office_chair
+    reference: monitor
+  - type: facing
+    subject: monitor
+    reference: office_chair
+  - type: facing
+    subject: chair_red
+    reference: table
+  - type: facing
+    subject: chair_blue
+    reference: table

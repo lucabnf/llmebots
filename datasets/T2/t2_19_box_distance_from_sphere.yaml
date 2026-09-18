@@ -1,0 +1,33 @@
+id: t2_19_box_distance_from_sphere
+tier: T2
+dataset: main
+prompt: "A red box and a blue sphere on the floor, exactly half a meter apart."
+
+# T2 — metric distance constraint (0.5 m centre-to-centre).
+
+spec:
+  objects:
+    - id: floor
+      type: Floor
+    - id: red_box
+      type: Box
+      on_top_of: floor
+    - id: blue_sphere
+      type: Sphere
+      on_top_of: floor
+
+  attributes:
+    - target: red_box
+      field: baseColor
+      constraint: equals
+      value: [1.0, 0.0, 0.0]
+    - target: blue_sphere
+      field: baseColor
+      constraint: equals
+      value: [0.0, 0.0, 1.0]
+
+  relations:
+    - type: distance
+      subject: red_box
+      reference: blue_sphere
+      value: 0.5

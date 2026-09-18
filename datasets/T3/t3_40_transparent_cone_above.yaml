@@ -1,0 +1,36 @@
+id: t3_40_transparent_cone_above
+tier: T3
+dataset: main
+prompt: "A green box on the floor. A blue, half-transparent cone is above the box."
+
+# T3 — transparency attribute + above, mirrors t3_30's pattern with
+# a different primitive/color for the transparent object.
+
+spec:
+  objects:
+    - id: floor
+      type: Floor
+    - id: green_box
+      type: Box
+      on_top_of: floor
+    - id: blue_cone
+      type: Cone
+
+  attributes:
+    - target: green_box
+      field: baseColor
+      constraint: equals
+      value: [0.0, 1.0, 0.0]
+    - target: blue_cone
+      field: baseColor
+      constraint: equals
+      value: [0.0, 0.0, 1.0]
+    - target: blue_cone
+      field: transparency
+      constraint: equals
+      value: 0.5
+
+  relations:
+    - type: above
+      subject: blue_cone
+      reference: green_box

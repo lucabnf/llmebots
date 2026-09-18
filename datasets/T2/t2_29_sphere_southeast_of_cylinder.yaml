@@ -1,0 +1,32 @@
+id: t2_29_sphere_southeast_of_cylinder
+tier: T2
+dataset: main
+prompt: "A green sphere southeast of a yellow cylinder. Both are on the floor."
+
+# T2 — southeast_of, new object/color combo (mirrors t2_16's pattern).
+
+spec:
+  objects:
+    - id: floor
+      type: Floor
+    - id: yellow_cylinder
+      type: Cylinder
+      on_top_of: floor
+    - id: green_sphere
+      type: Sphere
+      on_top_of: floor
+
+  attributes:
+    - target: yellow_cylinder
+      field: baseColor
+      constraint: equals
+      value: [1.0, 1.0, 0.0]
+    - target: green_sphere
+      field: baseColor
+      constraint: equals
+      value: [0.0, 1.0, 0.0]
+
+  relations:
+    - type: southeast_of
+      subject: green_sphere
+      reference: yellow_cylinder

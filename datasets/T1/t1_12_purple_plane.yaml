@@ -1,0 +1,19 @@
+id: t1_12_purple_plane
+tier: T1
+dataset: main
+prompt: "A purple plane."
+
+# T1 — single primitive, color only.
+
+spec:
+  objects:
+    - id: purple_plane
+      type: Plane
+
+  attributes:
+    - target: purple_plane
+      field: baseColor
+      constraint: equals
+      value: [0.5, 0.0, 0.5]
+
+  relations: []

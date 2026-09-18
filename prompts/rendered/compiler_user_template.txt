@@ -1,0 +1,84 @@
+Convert the scene description into a JSON object with exactly three keys: "objects", "attributes", "relations".
+
+objects: one entry per object, {"id": <unique snake_case string>, "type": <catalog node name>, "on_top_of": <id, optional>}.
+  - "on_top_of" is the ONLY way to express physical support; never write {"type": "on", ...} in relations.
+  - The type comes from the NOUN that introduces the object (e.g. "a grey plane" -> type Plane), never from a word used later to describe its function, orientation, or role (e.g. "...standing as a panel" does NOT mean type Panel — Panel is a real but unrelated catalog entry that happens to share that word; the object is still a Plane).
+  - Quantity ("three chairs") means THREE separate object entries, not one entry with a count. If the instances are distinguished by an attribute (e.g. "one red, one blue"), name each id after its distinguishing attribute (chair_red, chair_blue) and bind each attribute to the right id. If they are truly identical, use a numeric suffix (chair_1, chair_2, chair_3). A relation stated over the group applies to EVERY expanded instance (one relation entry per instance).
+  - Architectural/structural elements described as part of the room (e.g. a wall running along a side of the room) are on_top_of the floor by default, even when the description doesn't explicitly say "on the floor" — being part of a room implies resting on its floor, the same as any freestanding object in it.
+  - A phrase describing an object's ROLE or PURPOSE, not a physical or spatial property (e.g. "...as a nightstand", "...as a bookshelf", "used as a table") does NOT correspond to any object, attribute, or relation. Do not invent a new object for the role word, do not create a relation using it, and do not add it as a descriptor attribute either — ignore it entirely. Only the object it describes (with its real type and any other stated details) matters.
+
+attributes: capture every stated descriptive detail about an object as {"target": <id>, "field": <field name>, "constraint": "equals", "value": <the literal word or number exactly as stated>}. Four cases for the field name — always exactly one:
+  1. Color: field is ALWAYS "color", regardless of the object's type — never "baseColor" or any other name, even if the object is a plain geometry primitive. Value is the literal color word exactly as given (e.g. "red") — do NOT compute or guess an RGB triplet, and do NOT decide which real Webots field this maps to for this object's type; both are the downstream generation model's job, not yours.
+  2. Transparency: field is ALWAYS "transparency", regardless of type. Value is the literal word/phrase describing it (e.g. "half-transparent") if that is how the description states it, OR the stated number if the description gives one explicitly (e.g. "50% transparent" -> 0.5) — do NOT compute a number from a qualitative phrase (the phrase "half-transparent" stays that exact phrase, not a computed 0.5); that conversion is the downstream generation model's job.
+  3. Any other numeric size/height/radius/distance-type detail that matches a real field this object's type actually has — check the catalog reference below for that type. The field name must match what the catalog reference below shows for that object's type — do not assume a name. Different types use different field names for the same kind of dimension (e.g. Sphere uses "radius", Cone uses "height" and "bottomRadius", Box uses "size") — check the reference block for the object's actual type before writing a field name, and use whichever name it lists there. Write the stated number as a JSON number, never as a quoted string ("value": 4, never "value": "4") — never compute or guess a number that wasn't given. If the description states only ONE dimension of a multi-number field (e.g. a wall's length, when its real field is a 3-number size), add "component": "x", "y", or "z" alongside "field" to mark which axis that number constrains, instead of guessing the other two numbers — pick whichever axis the catalog's own default value for that field is otherwise smallest/most fixed on for that type (the long, stated dimension is the one that varies).
+  4. Everything else that doesn't fit cases 1-3 — most often a qualitative size/scale word with no number ("small", "large", "tiny", "short", "tall", "wide", "narrow"), but really anything the catalog has no field for. Use field "descriptor" instead, value the literal word/phrase. "descriptor" is not a real Webots field name; it exists purely so nothing stated gets dropped just because there is no catalog slot for it. Separate details never merge: if the description gives BOTH a qualitative word and a number for the same kind of thing (e.g. "a small, ten-centimeter box"), include the number under its real field name (case 3) AND the word as its own descriptor attribute (case 4) — copy everything stated, never merge or discard either one. Only include attributes the description actually states — never invent a value that wasn't given.
+
+relations: Physical support ("on", "on top of", "resting on", "sitting on", ...) is NEVER written here — use the on_top_of field on the object instead. There is no "on" entry in relations:. {"type": "between", "subject": <id>, "endpoint1": <id>, "endpoint2": <id>} — use ONLY when the description states the object is between two others. {"type": "distance", "subject": <id>, "reference": <id>, "value": <meters>} — use ONLY when the description states an exact distance number. For an object explicitly facing another object use: {"type": "facing", "subject": <id>, "reference": <id>}. Webots uses local +X as forward. If the description instead states an explicit world direction, use `world_direction` with ENU coordinates and omit `reference`; use `mode: "3d"` only when vertical aim matters. For every other spatial relation (near, above, below, east of, north of, beside, underneath, or anything else) use: {"type": <the relation word or short phrase EXACTLY as stated in the description, lowercase — e.g. "east of", "beside", "resting above">, "subject": <id>, "reference": <id>}. Copy the description's own wording — do NOT normalize a synonym to a different word ("beside" stays "beside", not rewritten to "near"). Interpreting what a relation word means spatially is a later stage's job, not yours.
+  - "relative_to"/"offset" are fields on an OBJECT (not a relation type): {"id": <id>, "type": <type>, "relative_to": <id>, "offset": [dx, dy, dz]} where +x=east, +y=north, +z=up. Use this ONLY when the description states an exact combined offset in two or more axes (e.g. "exactly 0.3m east and 0.1m north of the table") that the relation types above cannot express together. Never estimate or invent an offset — only transcribe numbers the description actually gives.
+
+Do not compute or guess any translation/position coordinate. Every placement decision that requires interpreting qualitative language (what "near" or "east of" means numerically) is intentionally left to a later stage — your output must contain no translation/position field.
+
+Example 1
+Description: "A red box."
+Output:
+{"objects": [{"id": "red_box", "type": "Box"}],
+ "attributes": [{"target": "red_box", "field": "color", "constraint": "equals", "value": "red"}],
+ "relations": []}
+
+Example 2 (support + cardinal + qualitative size word)
+Description: "A small red box on the floor. A blue sphere is east of the box."
+Output:
+{"objects": [
+   {"id": "floor", "type": "Floor"},
+   {"id": "red_box", "type": "Box", "on_top_of": "floor"},
+   {"id": "blue_sphere", "type": "Sphere", "on_top_of": "floor"}],
+ "attributes": [
+   {"target": "red_box", "field": "color", "constraint": "equals", "value": "red"},
+   {"target": "red_box", "field": "descriptor", "constraint": "equals", "value": "small"},
+   {"target": "blue_sphere", "field": "color", "constraint": "equals", "value": "blue"}],
+ "relations": [
+   {"type": "east of", "subject": "blue_sphere", "reference": "red_box"}]}
+
+Example 3 (multiplicity: distinguishing attribute, group relation fans out)
+Description: "A round table on the floor. Two chairs are near the table, one red and one blue."
+Output:
+{"objects": [
+   {"id": "floor", "type": "Floor"},
+   {"id": "round_table", "type": "RoundTable", "on_top_of": "floor"},
+   {"id": "chair_red", "type": "Chair", "on_top_of": "floor"},
+   {"id": "chair_blue", "type": "Chair", "on_top_of": "floor"}],
+ "attributes": [
+   {"target": "chair_red", "field": "color", "constraint": "equals", "value": "red"},
+   {"target": "chair_blue", "field": "color", "constraint": "equals", "value": "blue"}],
+ "relations": [
+   {"type": "near", "subject": "chair_red", "reference": "round_table"},
+   {"type": "near", "subject": "chair_blue", "reference": "round_table"}]}
+
+Example 4 (transparency: literal phrase, not a computed number)
+Description: "A yellow, half-transparent sphere on the floor."
+Output:
+{"objects": [
+   {"id": "floor", "type": "Floor"},
+   {"id": "yellow_sphere", "type": "Sphere", "on_top_of": "floor"}],
+ "attributes": [
+   {"target": "yellow_sphere", "field": "color", "constraint": "equals", "value": "yellow"},
+   {"target": "yellow_sphere", "field": "transparency", "constraint": "equals", "value": "half-transparent"}],
+ "relations": []}
+
+Example 5 (support phrasing variations stay on_top_of, never a relation; role phrase ignored)
+Description: "A brown box stands on the floor. A green ball sits on top of the box as a decoration."
+Output:
+{"objects": [
+   {"id": "floor", "type": "Floor"},
+   {"id": "brown_box", "type": "Box", "on_top_of": "floor"},
+   {"id": "green_ball", "type": "Sphere", "on_top_of": "brown_box"}],
+ "attributes": [
+   {"target": "brown_box", "field": "color", "constraint": "equals", "value": "brown"},
+   {"target": "green_ball", "field": "color", "constraint": "equals", "value": "green"}],
+ "relations": []}
+
+
+<CATALOG_CONTEXT>
+
+Now convert this description:
+Description: <SCENE_DESCRIPTION>

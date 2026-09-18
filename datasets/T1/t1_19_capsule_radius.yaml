@@ -1,0 +1,23 @@
+id: t1_19_capsule_radius
+tier: T1
+dataset: main
+prompt: "A green capsule, ten centimeters in radius."
+
+# T1 — single primitive, color + stated size (radius).
+
+spec:
+  objects:
+    - id: green_capsule
+      type: Capsule
+
+  attributes:
+    - target: green_capsule
+      field: baseColor
+      constraint: equals
+      value: [0.0, 1.0, 0.0]
+    - target: green_capsule
+      field: radius
+      constraint: equals
+      value: 0.1
+
+  relations: []

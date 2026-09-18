@@ -1,0 +1,37 @@
+id: t3_30_transparent_sphere_above_box
+tier: T3
+dataset: main
+prompt: "A blue box on the floor. A red, half-transparent sphere is above the box."
+
+# T3 — multi-attribute on one object (colour + transparency for the
+# sphere). Vertical relation (above) plus the synthetic on for the
+# box. Transparency exercises a non-color attribute path.
+
+spec:
+  objects:
+    - id: floor
+      type: Floor
+    - id: blue_box
+      type: Box
+      on_top_of: floor
+    - id: red_sphere
+      type: Sphere
+
+  attributes:
+    - target: blue_box
+      field: baseColor
+      constraint: equals
+      value: [0.0, 0.0, 1.0]
+    - target: red_sphere
+      field: baseColor
+      constraint: equals
+      value: [1.0, 0.0, 0.0]
+    - target: red_sphere
+      field: transparency
+      constraint: equals
+      value: 0.5
+
+  relations:
+    - type: above
+      subject: red_sphere
+      reference: blue_box

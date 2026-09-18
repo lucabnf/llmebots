@@ -1,0 +1,52 @@
+id: t4h_14_classroom_variant
+tier: T4
+dataset: heldout
+prompt: 'Design a classroom scene for a single-student desk setup: the desk stands on the floor with a wooden chair south
+  of it. A blue book lies on top of the desk. A blackboard stands north of the desk, with a clock east of it for keeping time.
+  A bench sits west of the desk for a second visitor. The wooden chair faces the blackboard.'
+spec:
+  objects:
+  - id: floor
+    type: Floor
+  - id: desk
+    type: Desk
+    on_top_of: floor
+  - id: wooden_chair
+    type: WoodenChair
+    on_top_of: floor
+  - id: book
+    type: Book
+    on_top_of: desk
+  - id: blackboard
+    type: Blackboard
+    on_top_of: floor
+  - id: clock
+    type: Clock
+    on_top_of: floor
+  - id: bench
+    type: Bench
+    on_top_of: floor
+  attributes:
+  - target: book
+    field: color
+    constraint: equals
+    value:
+    - 0.0
+    - 0.0
+    - 1.0
+  relations:
+  - type: south_of
+    subject: wooden_chair
+    reference: desk
+  - type: north_of
+    subject: blackboard
+    reference: desk
+  - type: east_of
+    subject: clock
+    reference: blackboard
+  - type: west_of
+    subject: bench
+    reference: desk
+  - type: facing
+    subject: wooden_chair
+    reference: blackboard

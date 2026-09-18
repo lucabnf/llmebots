@@ -1,0 +1,32 @@
+id: t2_16_box_southeast_of_sphere
+tier: T2
+dataset: main
+prompt: "A red box southeast of a blue sphere. Both are on the floor."
+
+# T2 — compound cardinal (southeast_of).
+
+spec:
+  objects:
+    - id: floor
+      type: Floor
+    - id: blue_sphere
+      type: Sphere
+      on_top_of: floor
+    - id: red_box
+      type: Box
+      on_top_of: floor
+
+  attributes:
+    - target: blue_sphere
+      field: baseColor
+      constraint: equals
+      value: [0.0, 0.0, 1.0]
+    - target: red_box
+      field: baseColor
+      constraint: equals
+      value: [1.0, 0.0, 0.0]
+
+  relations:
+    - type: southeast_of
+      subject: red_box
+      reference: blue_sphere

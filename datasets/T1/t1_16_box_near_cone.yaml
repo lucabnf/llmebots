@@ -1,0 +1,29 @@
+id: t1_16_box_near_cone
+tier: T1
+dataset: main
+prompt: "A purple box near an orange cone."
+
+# T1 — two objects, "near" relation, no floor stated, mirrors
+# t1_08's pattern with different shapes/colors.
+
+spec:
+  objects:
+    - id: purple_box
+      type: Box
+    - id: orange_cone
+      type: Cone
+
+  attributes:
+    - target: purple_box
+      field: baseColor
+      constraint: equals
+      value: [0.5, 0.0, 0.5]
+    - target: orange_cone
+      field: baseColor
+      constraint: equals
+      value: [1.0, 0.5, 0.0]
+
+  relations:
+    - type: near
+      subject: purple_box
+      reference: orange_cone

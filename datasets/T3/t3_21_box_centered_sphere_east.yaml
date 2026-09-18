@@ -1,0 +1,36 @@
+id: t3_21_box_centered_sphere_east
+tier: T3
+dataset: main
+prompt: "A red box centered on the floor. A blue sphere is east of the box."
+
+# T3 — center_inside + east_of. Tests the containment relation
+# (only T3 case for center_inside) alongside a simple cardinal.
+
+spec:
+  objects:
+    - id: floor
+      type: Floor
+    - id: red_box
+      type: Box
+      on_top_of: floor
+    - id: blue_sphere
+      type: Sphere
+      on_top_of: floor
+
+  attributes:
+    - target: red_box
+      field: baseColor
+      constraint: equals
+      value: [1.0, 0.0, 0.0]
+    - target: blue_sphere
+      field: baseColor
+      constraint: equals
+      value: [0.0, 0.0, 1.0]
+
+  relations:
+    - type: center_inside
+      subject: red_box
+      reference: floor
+    - type: east_of
+      subject: blue_sphere
+      reference: red_box

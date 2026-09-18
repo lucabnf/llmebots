@@ -1,0 +1,27 @@
+id: t1_18_sphere_on_box
+tier: T1
+dataset: main
+prompt: "A blue sphere on top of a red box."
+
+# T1 — direct on_top_of stacking (object field, not a relation),
+# mirrors t1_10's pattern with different shapes/colors.
+
+spec:
+  objects:
+    - id: red_box
+      type: Box
+    - id: blue_sphere
+      type: Sphere
+      on_top_of: red_box
+
+  attributes:
+    - target: red_box
+      field: baseColor
+      constraint: equals
+      value: [1.0, 0.0, 0.0]
+    - target: blue_sphere
+      field: baseColor
+      constraint: equals
+      value: [0.0, 0.0, 1.0]
+
+  relations: []

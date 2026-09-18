@@ -1,0 +1,43 @@
+id: t3_32_box_sphere_west_cylinder_south
+tier: T3
+dataset: main
+prompt: "A blue box on the floor. A red sphere is west of the box. A yellow cylinder is south of the box."
+
+# T3 — two independent cardinal relations off the same anchor,
+# mirrors t3_22's pattern with different colors/directions.
+
+spec:
+  objects:
+    - id: floor
+      type: Floor
+    - id: blue_box
+      type: Box
+      on_top_of: floor
+    - id: red_sphere
+      type: Sphere
+      on_top_of: floor
+    - id: yellow_cylinder
+      type: Cylinder
+      on_top_of: floor
+
+  attributes:
+    - target: blue_box
+      field: baseColor
+      constraint: equals
+      value: [0.0, 0.0, 1.0]
+    - target: red_sphere
+      field: baseColor
+      constraint: equals
+      value: [1.0, 0.0, 0.0]
+    - target: yellow_cylinder
+      field: baseColor
+      constraint: equals
+      value: [1.0, 1.0, 0.0]
+
+  relations:
+    - type: west_of
+      subject: red_sphere
+      reference: blue_box
+    - type: south_of
+      subject: yellow_cylinder
+      reference: blue_box

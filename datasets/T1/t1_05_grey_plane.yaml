@@ -1,0 +1,22 @@
+id: t1_05_grey_plane
+tier: T1
+dataset: main
+prompt: "A grey plane."
+
+# T1 — single object + colour for Plane (less-common type).
+# Plane is intentionally standalone here; using Plane as subject in a
+# cardinal relation is fragile due to its zero Y-extent in the default
+# orientation.
+
+spec:
+  objects:
+    - id: grey_plane
+      type: Plane
+
+  attributes:
+    - target: grey_plane
+      field: baseColor
+      constraint: equals
+      value: [0.5, 0.5, 0.5]
+
+  relations: []

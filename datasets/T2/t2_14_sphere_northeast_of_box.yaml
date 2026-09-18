@@ -1,0 +1,33 @@
+id: t2_14_sphere_northeast_of_box
+tier: T2
+dataset: main
+prompt: "A blue sphere northeast of a red box. Both are on the floor."
+
+# T2 — compound cardinal (northeast_of). Tests two-axis displacement
+# with the axis-balance check.
+
+spec:
+  objects:
+    - id: floor
+      type: Floor
+    - id: red_box
+      type: Box
+      on_top_of: floor
+    - id: blue_sphere
+      type: Sphere
+      on_top_of: floor
+
+  attributes:
+    - target: red_box
+      field: baseColor
+      constraint: equals
+      value: [1.0, 0.0, 0.0]
+    - target: blue_sphere
+      field: baseColor
+      constraint: equals
+      value: [0.0, 0.0, 1.0]
+
+  relations:
+    - type: northeast_of
+      subject: blue_sphere
+      reference: red_box

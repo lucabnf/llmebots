@@ -1,0 +1,29 @@
+id: t1_09_sphere_above_box
+tier: T1
+dataset: main
+prompt: "A red sphere above a blue box."
+
+# T1 — vertical (Z-axis) relation. Sphere must be at higher Z than
+# the box, with XY overlap.
+
+spec:
+  objects:
+    - id: blue_box
+      type: Box
+    - id: red_sphere
+      type: Sphere
+
+  attributes:
+    - target: blue_box
+      field: baseColor
+      constraint: equals
+      value: [0.0, 0.0, 1.0]
+    - target: red_sphere
+      field: baseColor
+      constraint: equals
+      value: [1.0, 0.0, 0.0]
+
+  relations:
+    - type: above
+      subject: red_sphere
+      reference: blue_box

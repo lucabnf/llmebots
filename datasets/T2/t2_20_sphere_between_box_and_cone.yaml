@@ -1,0 +1,41 @@
+id: t2_20_sphere_between_box_and_cone
+tier: T2
+dataset: main
+prompt: "A green sphere between a red box and a blue cone. All three are on the floor."
+
+# T2 — composite ternary relation (between). Subject sphere lies on
+# the segment between box and cone.
+
+spec:
+  objects:
+    - id: floor
+      type: Floor
+    - id: red_box
+      type: Box
+      on_top_of: floor
+    - id: blue_cone
+      type: Cone
+      on_top_of: floor
+    - id: green_sphere
+      type: Sphere
+      on_top_of: floor
+
+  attributes:
+    - target: red_box
+      field: baseColor
+      constraint: equals
+      value: [1.0, 0.0, 0.0]
+    - target: blue_cone
+      field: baseColor
+      constraint: equals
+      value: [0.0, 0.0, 1.0]
+    - target: green_sphere
+      field: baseColor
+      constraint: equals
+      value: [0.0, 1.0, 0.0]
+
+  relations:
+    - type: between
+      subject: green_sphere
+      endpoint1: red_box
+      endpoint2: blue_cone

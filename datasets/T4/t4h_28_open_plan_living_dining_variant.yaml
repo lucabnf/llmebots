@@ -1,0 +1,90 @@
+id: t4h_28_open_plan_living_dining_variant
+tier: T4
+dataset: heldout
+prompt: 'Design an open-plan living and dining space for a family that likes to entertain: a sofa stands on the floor. A round
+  table is east of the sofa, and an armchair is south of it. A dining table is north of the sofa, with a red chair east of
+  it and a blue chair west of it. A fridge is north of the dining table. A floor light is west of the sofa, and a potted tree
+  is southwest of it. The sofa and armchair face each other, and both dining chairs face the dining table.'
+spec:
+  objects:
+  - id: floor
+    type: Floor
+  - id: sofa
+    type: Sofa
+    on_top_of: floor
+  - id: round_table
+    type: RoundTable
+    on_top_of: floor
+  - id: armchair
+    type: Armchair
+    on_top_of: floor
+  - id: dining_table
+    type: Table
+    on_top_of: floor
+  - id: chair_red
+    type: Chair
+    on_top_of: floor
+  - id: chair_blue
+    type: Chair
+    on_top_of: floor
+  - id: fridge
+    type: Fridge
+    on_top_of: floor
+  - id: floor_light
+    type: FloorLight
+    on_top_of: floor
+  - id: potted_tree
+    type: PottedTree
+    on_top_of: floor
+  attributes:
+  - target: chair_red
+    field: color
+    constraint: equals
+    value:
+    - 1.0
+    - 0.0
+    - 0.0
+  - target: chair_blue
+    field: color
+    constraint: equals
+    value:
+    - 0.0
+    - 0.0
+    - 1.0
+  relations:
+  - type: east_of
+    subject: round_table
+    reference: sofa
+  - type: south_of
+    subject: armchair
+    reference: sofa
+  - type: north_of
+    subject: dining_table
+    reference: sofa
+  - type: east_of
+    subject: chair_red
+    reference: dining_table
+  - type: west_of
+    subject: chair_blue
+    reference: dining_table
+  - type: south_of
+    subject: dining_table
+    reference: fridge
+  - type: east_of
+    subject: sofa
+    reference: floor_light
+  - type: southwest_of
+    subject: potted_tree
+    reference: sofa
+  - type: facing
+    subject: sofa
+    reference: armchair
+  - type: facing
+    subject: armchair
+    reference: sofa
+  - type: facing
+    subject: chair_red
+    reference: dining_table
+  - type: facing
+    subject: chair_blue
+    reference: dining_table

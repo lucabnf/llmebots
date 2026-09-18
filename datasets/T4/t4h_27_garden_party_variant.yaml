@@ -1,0 +1,54 @@
+id: t4h_27_garden_party_variant
+tier: T4
+dataset: heldout
+prompt: 'I''m setting up a garden party scene for an outdoor lunch: a table with an umbrella stands on the floor. A barbecue
+  is south of the table, a bench is east of it, and a second bench is west of it for guests. A potted tree is north of the
+  table, and a wheelbarrow is northeast of the tree. Both benches and the barbecue face the table with the umbrella.'
+spec:
+  objects:
+  - id: floor
+    type: Floor
+  - id: table_with_umbrella
+    type: TableWithUmbrella
+    on_top_of: floor
+  - id: barbecue
+    type: Barbecue
+    on_top_of: floor
+  - id: bench_east
+    type: Bench
+    on_top_of: floor
+  - id: bench_west
+    type: Bench
+    on_top_of: floor
+  - id: potted_tree
+    type: PottedTree
+    on_top_of: floor
+  - id: wheelbarrow
+    type: Wheelbarrow
+    on_top_of: floor
+  attributes: []
+  relations:
+  - type: south_of
+    subject: barbecue
+    reference: table_with_umbrella
+  - type: east_of
+    subject: bench_east
+    reference: table_with_umbrella
+  - type: west_of
+    subject: bench_west
+    reference: table_with_umbrella
+  - type: north_of
+    subject: potted_tree
+    reference: table_with_umbrella
+  - type: northeast_of
+    subject: wheelbarrow
+    reference: potted_tree
+  - type: facing
+    subject: bench_east
+    reference: table_with_umbrella
+  - type: facing
+    subject: bench_west
+    reference: table_with_umbrella
+  - type: facing
+    subject: barbecue
+    reference: table_with_umbrella

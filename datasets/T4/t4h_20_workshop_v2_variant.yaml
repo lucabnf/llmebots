@@ -1,0 +1,50 @@
+id: t4h_20_workshop_v2_variant
+tier: T4
+dataset: heldout
+prompt: 'Set up a well-stocked home workshop: a bench stands on the floor. A wooden box is east of the bench, with a cardboard
+  box on top of it. A wheelbarrow is west of the bench, and a watering can is north of it. A wall four meters long runs along
+  the south side of the room, south of the bench. The wheelbarrow points toward the bench.'
+spec:
+  objects:
+  - id: floor
+    type: Floor
+  - id: bench
+    type: Bench
+    on_top_of: floor
+  - id: wooden_box
+    type: WoodenBox
+    on_top_of: floor
+  - id: cardboard_box
+    type: CardboardBox
+    on_top_of: wooden_box
+  - id: wheelbarrow
+    type: Wheelbarrow
+    on_top_of: floor
+  - id: watering_can
+    type: WateringCan
+    on_top_of: floor
+  - id: wall
+    type: Wall
+    on_top_of: floor
+  attributes:
+  - target: wall
+    field: size
+    component: y
+    constraint: equals
+    value: 4.0
+  relations:
+  - type: east_of
+    subject: wooden_box
+    reference: bench
+  - type: west_of
+    subject: wheelbarrow
+    reference: bench
+  - type: north_of
+    subject: watering_can
+    reference: bench
+  - type: north_of
+    subject: bench
+    reference: wall
+  - type: facing
+    subject: wheelbarrow
+    reference: bench

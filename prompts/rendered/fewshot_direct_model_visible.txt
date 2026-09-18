@@ -1,0 +1,129 @@
+[FEW-SHOT EXAMPLES — three demonstrations of correct .wbt scenes] Use these examples to learn the correct compositional patterns (Solid wrapper for each visible object, on-floor stacking math, Cone field naming, etc.). Do not copy the example colours or object names into your output — adapt the patterns to the scene description below.
+
+Example 1
+Input: A purple cube on the floor.
+Output:
+#VRML_SIM R2025a utf8
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.5773 0.5773 0.5773 2.0944
+  position 1 -1 1
+}
+Background {
+  skyColor 0.4 0.6 0.8
+}
+DirectionalLight {
+  direction -0.5 -0.5 -1
+}
+Floor {
+  size 5 5
+}
+Solid {
+  translation 0 0 0.05
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.5 0 0.5
+      }
+      geometry Box {
+        size 0.1 0.1 0.1
+      }
+    }
+  ]
+  name "purple_cube"
+}
+
+Example 2
+Input: A small white sphere east of an orange box. Both are on the floor.
+Output:
+#VRML_SIM R2025a utf8
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.5773 0.5773 0.5773 2.0944
+  position 2 -2 1
+}
+Background {
+  skyColor 0.4 0.6 0.8
+}
+DirectionalLight {
+  direction -0.5 -0.5 -1
+}
+Floor {
+  size 5 5
+}
+Solid {
+  translation 0 0 0.1
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 1 0.5 0
+      }
+      geometry Box {
+        size 0.2 0.2 0.2
+      }
+    }
+  ]
+  name "orange_box"
+}
+Solid {
+  translation 0.4 0 0.05
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 1 1 1
+      }
+      geometry Sphere {
+        radius 0.05
+      }
+    }
+  ]
+  name "white_sphere"
+}
+
+Example 3
+Input: A small brown cone above a wide cyan slab.
+Output:
+#VRML_SIM R2025a utf8
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.5773 0.5773 0.5773 2.0944
+  position 1 -1 1
+}
+Background {
+  skyColor 0.4 0.6 0.8
+}
+DirectionalLight {
+  direction -0.5 -0.5 -1
+}
+Solid {
+  translation 0 0 0.025
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 1 1
+      }
+      geometry Box {
+        size 0.4 0.4 0.05
+      }
+    }
+  ]
+  name "cyan_slab"
+}
+Solid {
+  translation 0 0 0.5
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.5 0.3 0.1
+      }
+      geometry Cone {
+        bottomRadius 0.1
+        height 0.2
+      }
+    }
+  ]
+  name "brown_cone"
+}

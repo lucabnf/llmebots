@@ -1,0 +1,29 @@
+id: t1_17_cone_above_sphere
+tier: T1
+dataset: main
+prompt: "A grey cone above a yellow sphere."
+
+# T1 — two objects, "above" relation, no floor stated, mirrors
+# t1_09's pattern with different shapes/colors.
+
+spec:
+  objects:
+    - id: grey_cone
+      type: Cone
+    - id: yellow_sphere
+      type: Sphere
+
+  attributes:
+    - target: grey_cone
+      field: baseColor
+      constraint: equals
+      value: [0.5, 0.5, 0.5]
+    - target: yellow_sphere
+      field: baseColor
+      constraint: equals
+      value: [1.0, 1.0, 0.0]
+
+  relations:
+    - type: above
+      subject: grey_cone
+      reference: yellow_sphere

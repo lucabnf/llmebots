@@ -1,0 +1,43 @@
+id: t3_22_box_with_sphere_east_cylinder_north
+tier: T3
+dataset: main
+prompt: "A red box on the floor. A blue sphere is east of the box. A green cylinder is north of the box."
+
+# T3 — multi-cardinal scene. Two simple cardinals from a shared
+# reference object.
+
+spec:
+  objects:
+    - id: floor
+      type: Floor
+    - id: red_box
+      type: Box
+      on_top_of: floor
+    - id: blue_sphere
+      type: Sphere
+      on_top_of: floor
+    - id: green_cylinder
+      type: Cylinder
+      on_top_of: floor
+
+  attributes:
+    - target: red_box
+      field: baseColor
+      constraint: equals
+      value: [1.0, 0.0, 0.0]
+    - target: blue_sphere
+      field: baseColor
+      constraint: equals
+      value: [0.0, 0.0, 1.0]
+    - target: green_cylinder
+      field: baseColor
+      constraint: equals
+      value: [0.0, 1.0, 0.0]
+
+  relations:
+    - type: east_of
+      subject: blue_sphere
+      reference: red_box
+    - type: north_of
+      subject: green_cylinder
+      reference: red_box

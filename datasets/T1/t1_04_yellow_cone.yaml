@@ -1,0 +1,19 @@
+id: t1_04_yellow_cone
+tier: T1
+dataset: main
+prompt: "A yellow cone."
+
+# T1 — single object + colour for Cone (less-common type).
+
+spec:
+  objects:
+    - id: yellow_cone
+      type: Cone
+
+  attributes:
+    - target: yellow_cone
+      field: baseColor
+      constraint: equals
+      value: [1.0, 1.0, 0.0]
+
+  relations: []

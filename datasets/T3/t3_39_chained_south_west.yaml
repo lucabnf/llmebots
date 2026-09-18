@@ -1,0 +1,44 @@
+id: t3_39_chained_south_west
+tier: T3
+dataset: main
+prompt: "A blue sphere, a red cone, and a green box on the floor. The cone is south of the sphere, and the box is west of the cone."
+
+# T3 — chained cardinals with different anchors (each relation
+# references the previous relation's subject), mirrors t3_29's
+# pattern with different shapes/colors/directions.
+
+spec:
+  objects:
+    - id: floor
+      type: Floor
+    - id: blue_sphere
+      type: Sphere
+      on_top_of: floor
+    - id: red_cone
+      type: Cone
+      on_top_of: floor
+    - id: green_box
+      type: Box
+      on_top_of: floor
+
+  attributes:
+    - target: blue_sphere
+      field: baseColor
+      constraint: equals
+      value: [0.0, 0.0, 1.0]
+    - target: red_cone
+      field: baseColor
+      constraint: equals
+      value: [1.0, 0.0, 0.0]
+    - target: green_box
+      field: baseColor
+      constraint: equals
+      value: [0.0, 1.0, 0.0]
+
+  relations:
+    - type: south_of
+      subject: red_cone
+      reference: blue_sphere
+    - type: west_of
+      subject: green_box
+      reference: red_cone
